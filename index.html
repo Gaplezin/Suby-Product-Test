@@ -680,6 +680,18 @@ var SCHEMA = [
       {id:'fraud',      label:'Fraud & Chargebacks', req:false, desc:'Chargeback rate vs Visa/MC thresholds, fraud scoring overview.'},
     ]
   },
+  { id:'affiliate', label:'Affiliate',
+    desc:'Manage your affiliate program — partners, commissions, tracking links and payouts.',
+    icoBg:'#f0fdf4', color:'#287a50',
+    ico:'<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="4" r="2" stroke="#287a50" stroke-width="1.2"/><circle cx="2" cy="11" r="1.5" stroke="#287a50" stroke-width="1.2"/><circle cx="12" cy="11" r="1.5" stroke="#287a50" stroke-width="1.2"/><path d="M3.5 10.5L7 6l3.5 4.5" stroke="#287a50" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    grpIco:'<svg class="ico" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="6" r="3"/><circle cx="4" cy="18" r="2"/><circle cx="20" cy="18" r="2"/><path d="M12 9c0 3-2 5-4 7M12 9c0 3 2 5 4 7"/></svg>',
+    items:[
+      {id:'overview',    label:'Overview',    req:true,  desc:'Program KPIs, top affiliates and recent activity.'},
+      {id:'affiliates',  label:'Affiliates',  req:true,  desc:'All your affiliate partners with links, conversions and commissions.'},
+      {id:'commissions', label:'Commissions', req:false, desc:'Pending and paid commissions with approval workflow.'},
+      {id:'setup',       label:'Setup',       req:false, desc:'Configure commission rates, cookie duration and payout rules.'},
+    ]
+  },
   { id:'connections', label:'Integration',
     desc:'Where Suby is active — API and Paylink connections at a glance.',
     icoBg:'#f0f3f8', color:'#3d5a80',
@@ -748,6 +760,7 @@ var SIDEBAR_PRESETS = {
     risk:         ['fraud','score','blocklist'],
     payouts:      ['overview','destinations','history','split'],
     notifications:['channels'],
+    affiliate:    ['overview','affiliates','commissions','setup'],
     connections:  ['overview','api'],
     config:       ['settings','team','customize'],
   },
@@ -758,6 +771,7 @@ var SIDEBAR_PRESETS = {
     payment:      ['transactions','payment-config','refunds'],
     payouts:      ['overview','destinations','history'],
     notifications:['channels'],
+    affiliate:    ['overview','affiliates'],
     connections:  ['overview'],
     config:       ['settings','customize'],
   }
@@ -4758,6 +4772,18 @@ function goPage(id) {
     else if (id==='connections-api') { pg.innerHTML = buildConnectionsApiPage(); pg.dataset.built='1'; setTimeout(renderIcons,20); }
     else if (id==='analytics-overview') { pg.innerHTML = '<div class="ph"><h2>Overview</h2></div>' + buildAnalyticsOverview(); pg.dataset.built='1'; }
     else if (id==='product-discounts') { pg.innerHTML = '<div class="ph" style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:10px"><div><h2>Discounts</h2><p>Percentage or fixed codes, per product or global.</p></div><button class="btn btn-p btn-sm" onclick="showDiscountModal()">+ New discount</button></div>' + buildDiscountsContent(); pg.dataset.built='1'; }
+    else if (id==='affiliate-overview') {
+      if (!pg.dataset.built) { pg.innerHTML = '<div class="ph" style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:10px"><div><h2>Affiliate program</h2><p>Track performance, manage partners and pay commissions.</p></div><button class="btn btn-p btn-sm" onclick="showInviteAffModal()">+ Invite affiliate</button></div>' + buildAffiliateOverview(); pg.dataset.built='1'; }
+    }
+    else if (id==='affiliate-affiliates') {
+      pg.innerHTML = '<div class="ph" style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:10px"><div><h2>Affiliates</h2><p>Manage your affiliate partners.</p></div><button class="btn btn-p btn-sm" onclick="showInviteAffModal()">+ Invite affiliate</button></div>' + buildAffiliatesContent(); pg.dataset.built='1';
+    }
+    else if (id==='affiliate-commissions') {
+      pg.innerHTML = '<div class="ph"><h2>Commissions</h2><p>Review, approve and pay commissions.</p></div>' + buildCommissionsContent(); pg.dataset.built='1';
+    }
+    else if (id==='affiliate-setup') {
+      buildAffSetupPage();
+    }
     else if (id==='config-customize') { goPage('customize'); return; }
     else if (id==='product-newproduct') { buildNewProductPage(); pg.dataset.built='1'; }
     else if (id==='notifications-channels') { buildNotifPage(); pg.dataset.built='1'; }
@@ -4789,7 +4815,7 @@ function goPage(id) {
     if (id==='customize') buildCustomizePage();
     if (id==='analytics-overview') { pg.dataset.built=''; pg.innerHTML=''; goPage(id); return; }
     if (id==='product-newproduct') { pg.dataset.built=''; pg.innerHTML=''; goPage(id); return; }
-    if (id==='payouts-destinations' || id==='payment-payment-config') { pg.dataset.built=''; pg.innerHTML=''; goPage(id); return; }
+    if (['payouts-destinations','payment-payment-config','affiliate-affiliates','affiliate-commissions','affiliate-setup','affiliate-overview'].indexOf(id)!==-1) { pg.dataset.built=''; pg.innerHTML=''; goPage(id); return; }
   }
 
   var EXTRA_TITLES = {'account':'Account verification','connections-overview':'Integration','notifications-channels':'Notifications','product-newproduct':'New product','product-discounts':'Discounts','analytics-overview':'Analytics - Overview'};
@@ -5629,6 +5655,433 @@ function buildPublishConfirm() {
   pg.classList.add('on');
 }
 
+
+
+// ─── AFFILIATE PROGRAM ────────────────────────────────────────────────────────
+
+var AFF_PROGRAM = {
+  enabled: true,
+  name: 'Suby Affiliates',
+  commissionType: 'percent',  // 'percent' | 'flat'
+  commissionRate: 30,          // 30% recurring
+  commissionDuration: 'lifetime', // 'lifetime' | 'months' | 'first'
+  commissionMonths: 12,
+  cookieDays: 60,
+  minPayout: 50,
+  currency: 'USD',
+  selfReferral: false,
+  rewardRepeat: true,
+};
+
+var AFFILIATES_DATA = [
+  {id:'aff_01', name:'Marie Dupont',      email:'marie@growth.fr',      code:'MARIE30',     status:'active',   joined:'Jan 12, 2025', clicks:1240, conversions:38, revenue:4820, commission:1446, pending:320,  paid:1126},
+  {id:'aff_02', name:'Tom Reeves',        email:'tom@devco.fr',          code:'TOMR',        status:'active',   joined:'Feb 3, 2025',  clicks:890,  conversions:24, revenue:2960, commission:888,  pending:210,  paid:678},
+  {id:'aff_03', name:'Pedro Alvarez',     email:'pedro@media.es',        code:'PEDRO2025',   status:'active',   joined:'Mar 1, 2025',  clicks:340,  conversions:9,  revenue:1080, commission:324,  pending:90,   paid:234},
+  {id:'aff_04', name:'Anna Schmidt',      email:'anna@brands.de',        code:'ANNA',        status:'pending',  joined:'Mar 18, 2025', clicks:0,    conversions:0,  revenue:0,    commission:0,    pending:0,    paid:0},
+  {id:'aff_05', name:'Lucas Moreau',      email:'lucas@saas.co',         code:'LUCAS10',     status:'active',   joined:'Dec 5, 2024',  clicks:2100, conversions:61, revenue:7930, commission:2379, pending:540,  paid:1839},
+  {id:'aff_06', name:'Priya Mehta',       email:'priya@growth.io',       code:'PRIYA',       status:'active',   joined:'Nov 14, 2024', clicks:680,  conversions:17, revenue:2040, commission:612,  pending:0,    paid:612},
+  {id:'aff_07', name:'David Kim',         email:'david@techco.kr',       code:'DAVID_K',     status:'suspended',joined:'Oct 2, 2024',  clicks:420,  conversions:11, revenue:1320, commission:396,  pending:0,    paid:396},
+  {id:'aff_08', name:'Julie Fontaine',    email:'julie@agence-jf.fr',    code:'JULIE_JF',    status:'active',   joined:'Jan 28, 2025', clicks:560,  conversions:14, revenue:1680, commission:504,  pending:120,  paid:384},
+];
+
+var COMMISSIONS_DATA = [
+  {id:'com_01', aff:'Lucas Moreau',  customer:'startup.io',       product:'Pro plan',    amount:49,  commission:14.70, date:'Mar 20, 2025', status:'pending',  type:'recurring'},
+  {id:'com_02', aff:'Marie Dupont',  customer:'alex@design.co',   product:'Pro plan',    amount:49,  commission:14.70, date:'Mar 19, 2025', status:'pending',  type:'recurring'},
+  {id:'com_03', aff:'Tom Reeves',    customer:'corp@team.io',     product:'Team plan',   amount:89,  commission:26.70, date:'Mar 18, 2025', status:'pending',  type:'new'},
+  {id:'com_04', aff:'Lucas Moreau',  customer:'dev@code.fr',      product:'Pro plan',    amount:49,  commission:14.70, date:'Mar 17, 2025', status:'approved', type:'recurring'},
+  {id:'com_05', aff:'Marie Dupont',  customer:'brand@studio.fr',  product:'Team plan',   amount:89,  commission:26.70, date:'Mar 16, 2025', status:'approved', type:'new'},
+  {id:'com_06', aff:'Julie Fontaine',customer:'media@agency.co',  product:'Starter',     amount:19,  commission:5.70,  date:'Mar 15, 2025', status:'paid',     type:'new'},
+  {id:'com_07', aff:'Priya Mehta',   customer:'fintech@io.in',    product:'Pro plan',    amount:49,  commission:14.70, date:'Mar 14, 2025', status:'paid',     type:'recurring'},
+  {id:'com_08', aff:'Lucas Moreau',  customer:'ai@tools.xyz',     product:'Team plan',   amount:89,  commission:26.70, date:'Mar 13, 2025', status:'paid',     type:'new'},
+];
+
+var AFF_TAB = 'all';
+var AFF_PAGE = 1;
+var AFF_ROWS = 8;
+var AFF_SEARCH = '';
+var COM_TAB = 'all';
+var COM_PAGE = 1;
+
+function affStatusBadge(s) {
+  var styles = {
+    active:    'color:var(--g);background:var(--gl);border-color:var(--gb)',
+    pending:   'color:var(--or);background:var(--ol);border-color:var(--ob)',
+    suspended: 'color:var(--re);background:var(--rl);border-color:var(--rb)',
+    approved:  'color:var(--bl);background:var(--bll);border-color:var(--blb)',
+    paid:      'color:var(--g);background:var(--gl);border-color:var(--gb)',
+    new:       'color:var(--bl);background:var(--bll);border-color:var(--blb)',
+    recurring: 'color:var(--tx3);background:var(--bg3);border-color:var(--bd)',
+  };
+  var label = s.charAt(0).toUpperCase() + s.slice(1);
+  return '<span style="display:inline-flex;align-items:center;font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:4px;border:1px solid;letter-spacing:.03em;' + (styles[s]||styles.pending) + '">' + label + '</span>';
+}
+
+function setAffTab(t)    { AFF_TAB=t; AFF_PAGE=1; rebuildAffPage(); }
+function setAffSearch(v) { AFF_SEARCH=v; AFF_PAGE=1; rebuildAffPage(); }
+function setAffPage(p)   { var max=Math.ceil(getAffFiltered().length/AFF_ROWS); AFF_PAGE=Math.max(1,Math.min(p,max)); rebuildAffPage(); }
+function setComTab(t)    { COM_TAB=t; COM_PAGE=1; rebuildComPage(); }
+function setComPage(p)   { var max=Math.ceil(getComFiltered().length/8); COM_PAGE=Math.max(1,Math.min(p,max)); rebuildComPage(); }
+
+function getAffFiltered() {
+  var q = AFF_SEARCH.toLowerCase();
+  return AFFILIATES_DATA.filter(function(a) {
+    var mTab = AFF_TAB==='all' || a.status===AFF_TAB;
+    var mQ = !q || a.name.toLowerCase().includes(q) || a.email.toLowerCase().includes(q) || a.code.toLowerCase().includes(q);
+    return mTab && mQ;
+  });
+}
+
+function getComFiltered() {
+  return COMMISSIONS_DATA.filter(function(c) {
+    return COM_TAB==='all' || c.status===COM_TAB;
+  });
+}
+
+function rebuildAffPage() {
+  var pg = document.getElementById('p-affiliate-affiliates');
+  if (pg) pg.innerHTML = '<div class="ph" style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:10px"><div><h2>Affiliates</h2><p>Manage your affiliate partners.</p></div><button class="btn btn-p btn-sm" onclick="showInviteAffModal()">+ Invite affiliate</button></div>' + buildAffiliatesContent();
+}
+
+function rebuildComPage() {
+  var pg = document.getElementById('p-affiliate-commissions');
+  if (pg) pg.innerHTML = '<div class="ph"><h2>Commissions</h2><p>Review, approve and pay commissions.</p></div>' + buildCommissionsContent();
+}
+
+function showInviteAffModal() {
+  var existing = document.getElementById('invite-aff-modal');
+  if (existing) existing.remove();
+  var overlay = document.createElement('div');
+  overlay.id = 'invite-aff-modal';
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.45);backdrop-filter:blur(4px);z-index:400;display:flex;align-items:center;justify-content:center;padding:1rem;animation:fi .15s ease';
+  overlay.onclick = function(e){ if(e.target===overlay) overlay.remove(); };
+
+  var box = document.createElement('div');
+  box.style.cssText = 'background:var(--bg);border-radius:16px;width:100%;max-width:440px;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,.18)';
+
+  var hdr = document.createElement('div');
+  hdr.style.cssText = 'padding:1.25rem 1.5rem;border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between';
+  hdr.innerHTML = '<div><div style="font-size:15px;font-weight:700;letter-spacing:-.02em">Invite an affiliate</div><div style="font-size:11px;color:var(--tx3);margin-top:1px">They\'ll receive an email with their tracking link</div></div>';
+  var cls = document.createElement('button');
+  cls.innerHTML = '&times;'; cls.style.cssText = 'background:none;border:none;cursor:pointer;font-size:20px;color:var(--tx3);line-height:1;padding:4px 6px';
+  cls.onclick = function(){ overlay.remove(); };
+  hdr.appendChild(cls);
+
+  var body = document.createElement('div');
+  body.style.cssText = 'padding:1.25rem 1.5rem;display:flex;flex-direction:column;gap:.875rem';
+
+  [['Name','text','e.g. Marie Dupont'],['Email address','email','affiliate@example.com'],['Custom code (optional)','text','e.g. MARIE30 — auto-generated if empty']].forEach(function(f,i) {
+    var wrap = document.createElement('div');
+    var lbl = document.createElement('label');
+    lbl.style.cssText = 'display:block;font-size:11px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px';
+    lbl.textContent = f[0];
+    var inp = document.createElement('input');
+    inp.type = f[1]; inp.placeholder = f[2];
+    inp.style.cssText = 'width:100%;font-family:var(--f);font-size:13px;padding:9px 12px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--tx);outline:none';
+    inp.onfocus = function(){ this.style.borderColor='var(--tx)'; };
+    inp.onblur  = function(){ this.style.borderColor='var(--bd)'; };
+    wrap.appendChild(lbl); wrap.appendChild(inp);
+    body.appendChild(wrap);
+  });
+
+  var ftr = document.createElement('div');
+  ftr.style.cssText = 'padding:1rem 1.5rem;border-top:1px solid var(--bd);display:flex;justify-content:space-between;background:var(--bg2)';
+  var btnC = document.createElement('button'); btnC.className='btn'; btnC.textContent='Cancel'; btnC.onclick=function(){ overlay.remove(); };
+  var btnS = document.createElement('button'); btnS.className='btn btn-p'; btnS.textContent='Send invite';
+  btnS.onclick = function(){ showToast('add','Invite sent!'); overlay.remove(); };
+  ftr.appendChild(btnC); ftr.appendChild(btnS);
+
+  box.appendChild(hdr); box.appendChild(body); box.appendChild(ftr);
+  overlay.appendChild(box);
+  document.body.appendChild(overlay);
+}
+
+function buildAffiliateOverview() {
+  var active = AFFILIATES_DATA.filter(function(a){return a.status==='active';}).length;
+  var totalRev = AFFILIATES_DATA.reduce(function(s,a){return s+a.revenue;},0);
+  var totalCom = AFFILIATES_DATA.reduce(function(s,a){return s+a.commission;},0);
+  var totalPending = AFFILIATES_DATA.reduce(function(s,a){return s+a.pending;},0);
+  var convRate = (AFFILIATES_DATA.reduce(function(s,a){return s+a.conversions;},0) /
+                  Math.max(1,AFFILIATES_DATA.reduce(function(s,a){return s+a.clicks;},0)) * 100).toFixed(1);
+
+  var topAffs = AFFILIATES_DATA.slice().sort(function(a,b){return b.revenue-a.revenue;}).slice(0,3);
+  var recentComs = COMMISSIONS_DATA.slice(0,5);
+
+  var thS = 'font-size:11px;font-weight:600;color:var(--tx3);padding:8px 14px;text-align:left;border-bottom:1px solid var(--bd);background:var(--bg2);white-space:nowrap';
+
+  return '<div class="g4" style="margin-bottom:1.25rem">' +
+    mkKpi('Affiliate revenue','$' + totalRev.toLocaleString(),'dlu','+22% vs last month','') +
+    mkKpi('Active affiliates',String(active),'dlu',AFFILIATES_DATA.length + ' total','') +
+    mkKpi('Pending commissions','$' + totalPending.toLocaleString(),'dln','awaiting payout','') +
+    mkKpi('Click → conversion',convRate + '%','dlu','avg across all affiliates','') +
+  '</div>' +
+
+  // Top affiliates
+  '<div class="g2" style="margin-bottom:1.25rem">' +
+
+    '<div class="card">' +
+      '<div class="ch"><span class="ct">Top affiliates</span><button class="btn btn-sm" onclick="goPage(\'affiliate-affiliates\')">View all</button></div>' +
+      '<table style="width:100%;border-collapse:collapse">' +
+        '<thead><tr>' +
+          ['Affiliate','Revenue','Commission','Conv.'].map(function(h){return '<th style="'+thS+'">'+h+'</th>';}).join('') +
+        '</tr></thead><tbody>' +
+        topAffs.map(function(a,i) {
+          return '<tr style="'+(i%2===0?'':'background:var(--bg2)')+'" onmouseover="connRowHover(this,1)" onmouseout="connRowHover(this,0)">' +
+            '<td style="padding:10px 14px"><div style="font-size:12.5px;font-weight:600">' + a.name + '</div><div style="font-family:var(--m);font-size:10.5px;color:var(--bl)">' + a.code + '</div></td>' +
+            '<td style="padding:10px 14px;font-family:var(--m);font-size:12px;font-weight:600">$' + a.revenue.toLocaleString() + '</td>' +
+            '<td style="padding:10px 14px;font-family:var(--m);font-size:12px;color:var(--g)">$' + a.commission.toLocaleString() + '</td>' +
+            '<td style="padding:10px 14px;font-size:12px;color:var(--tx3)">' + a.conversions + '</td>' +
+          '</tr>';
+        }).join('') +
+      '</tbody></table>' +
+    '</div>' +
+
+    '<div class="card">' +
+      '<div class="ch"><span class="ct">Recent commissions</span><button class="btn btn-sm" onclick="goPage(\'affiliate-commissions\')">View all</button></div>' +
+      '<div style="display:flex;flex-direction:column">' +
+        recentComs.map(function(c) {
+          return '<div style="display:flex;align-items:center;gap:12px;padding:10px 14px;border-bottom:1px solid var(--bg3)">' +
+            '<div style="flex:1;min-width:0"><div style="font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + c.aff + '</div><div style="font-size:11px;color:var(--tx3)">' + c.product + '</div></div>' +
+            '<div style="font-family:var(--m);font-size:12px;font-weight:600;color:var(--g)">+$' + c.commission.toFixed(2) + '</div>' +
+            affStatusBadge(c.status) +
+          '</div>';
+        }).join('') +
+      '</div>' +
+    '</div>' +
+
+  '</div>' +
+
+  // Program summary card
+  '<div class="card">' +
+    '<div class="ch"><span class="ct">Program</span><button class="btn btn-sm" onclick="goPage(\'affiliate-setup\')">Configure</button></div>' +
+    '<div class="cb" style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem">' +
+      [
+        ['Commission', AFF_PROGRAM.commissionRate + '% recurring'],
+        ['Cookie window', AFF_PROGRAM.cookieDays + ' days'],
+        ['Min. payout', '$' + AFF_PROGRAM.minPayout],
+        ['Duration', AFF_PROGRAM.commissionDuration === 'lifetime' ? 'Lifetime' : AFF_PROGRAM.commissionMonths + ' months'],
+      ].map(function(r) {
+        return '<div><div style="font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--tx3);margin-bottom:4px">' + r[0] + '</div><div style="font-size:13.5px;font-weight:700;letter-spacing:-.02em">' + r[1] + '</div></div>';
+      }).join('') +
+    '</div>' +
+  '</div>';
+}
+
+function buildAffiliatesContent() {
+  var filtered = getAffFiltered();
+  var total = filtered.length;
+  var totalP = Math.max(1,Math.ceil(total/AFF_ROWS));
+  var paged = filtered.slice((AFF_PAGE-1)*AFF_ROWS, AFF_PAGE*AFF_ROWS);
+  var counts = {all:AFFILIATES_DATA.length, active:0, pending:0, suspended:0};
+  AFFILIATES_DATA.forEach(function(a){ if(counts[a.status]!==undefined) counts[a.status]++; });
+
+  var thS = 'font-size:11px;font-weight:600;color:var(--tx3);padding:9px 14px;text-align:left;border-bottom:1px solid var(--bd);background:var(--bg2);white-space:nowrap';
+  var tabBtns = ['all','active','pending','suspended'].map(function(t) {
+    var on = AFF_TAB===t;
+    return '<button onclick="setAffTab(\''+t+'\')" style="padding:5px 12px;font-size:11.5px;font-weight:'+(on?'600':'400')+';font-family:var(--f);border:none;border-radius:var(--r);background:'+(on?'var(--tx)':'transparent')+';color:'+(on?'var(--bg)':'var(--tx2)')+';cursor:pointer;transition:all .12s">' +
+      t.charAt(0).toUpperCase()+t.slice(1) + (t!=='all'?' ('+counts[t]+')':'') +
+    '</button>';
+  }).join('');
+
+  var bs = function(d){ return 'background:var(--bg);border:1px solid var(--bd);border-radius:var(--r);padding:5px 8px;font-size:13px;color:'+(d?'var(--tx3)':'var(--tx)')+';cursor:'+(d?'default':'pointer')+';opacity:'+(d?'.35':'1'); };
+
+  var rows = paged.map(function(a,i) {
+    return '<tr style="'+(i%2===0?'':'background:var(--bg2)')+'" onmouseover="connRowHover(this,1)" onmouseout="connRowHover(this,0)">' +
+      '<td style="padding:10px 14px"><div style="font-size:12.5px;font-weight:600">' + a.name + '</div><div style="font-size:11px;color:var(--tx3)">' + a.email + '</div></td>' +
+      '<td style="padding:10px 14px"><span style="font-family:var(--m);font-size:11.5px;font-weight:600;background:var(--bg2);border:1px solid var(--bd);padding:2px 8px;border-radius:4px">' + a.code + '</span></td>' +
+      '<td style="padding:10px 14px;font-size:12px;color:var(--tx3)">' + a.joined + '</td>' +
+      '<td style="padding:10px 14px;font-size:12px;color:var(--tx2);text-align:right">' + a.clicks.toLocaleString() + '</td>' +
+      '<td style="padding:10px 14px;font-size:12px;color:var(--tx2);text-align:right">' + a.conversions + '</td>' +
+      '<td style="padding:10px 14px;font-family:var(--m);font-size:12.5px;font-weight:600;text-align:right">$' + a.revenue.toLocaleString() + '</td>' +
+      '<td style="padding:10px 14px;font-family:var(--m);font-size:12px;color:var(--g);text-align:right">$' + a.commission.toLocaleString() + '</td>' +
+      '<td style="padding:10px 14px">' + affStatusBadge(a.status) + '</td>' +
+      '<td style="padding:10px 14px;white-space:nowrap">' +
+        '<button onclick="showToast(\'add\',\'Link copied\')" style="background:none;border:none;cursor:pointer;color:var(--tx3);padding:4px;border-radius:4px;display:inline-flex;align-items:center" onmouseover="this.style.background=\'var(--bg3)\'" onmouseout="this.style.background=\'none\'"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M4 9l5-5M8 4h3v3M5 9H2V6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>' +
+      '</td>' +
+    '</tr>';
+  }).join('');
+
+  return '<div class="card">' +
+    '<div class="ch" style="flex-wrap:wrap;gap:8px">' +
+      '<div style="display:flex;gap:4px;background:var(--bg3);padding:3px;border-radius:var(--r2)">' + tabBtns + '</div>' +
+      '<div style="display:flex;gap:8px;align-items:center;margin-left:auto">' +
+        '<div style="position:relative"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="position:absolute;left:9px;top:50%;transform:translateY(-50%);opacity:.4;pointer-events:none"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input type="text" placeholder="Search affiliates\u2026" value="' + AFF_SEARCH + '" oninput="setAffSearch(this.value)" style="font-family:var(--f);font-size:12px;padding:6px 10px 6px 28px;border:1px solid var(--bd);border-radius:var(--r);background:var(--bg);color:var(--tx);outline:none;width:220px" onfocus="this.style.borderColor=\'var(--tx)\'" onblur="this.style.borderColor=\'var(--bd)\'"></div>' +
+      '</div>' +
+    '</div>' +
+    '<div style="overflow-x:auto"><table style="width:100%;min-width:800px;border-collapse:collapse">' +
+      '<thead><tr>' + ['Affiliate','Code','Joined','Clicks','Conv.','Revenue','Commission','Status',''].map(function(h,i){ return '<th style="'+thS+(i>3?';text-align:right':'')+(i===8?';width:40px':'')+'">'+h+'</th>'; }).join('') + '</tr></thead>' +
+      '<tbody>' + rows + '</tbody>' +
+    '</table></div>' +
+    '<div style="padding:.65rem 1.25rem;border-top:1px solid var(--bd);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">' +
+      '<span style="font-size:11px;color:var(--tx3)">' + paged.length + ' of ' + total + ' affiliates</span>' +
+      '<div style="display:flex;align-items:center;gap:6px">' +
+        '<button onclick="setAffPage(1)" '+(AFF_PAGE===1?'disabled':'')+' style="'+bs(AFF_PAGE===1)+'">&#171;</button>' +
+        '<button onclick="setAffPage('+(AFF_PAGE-1)+')" '+(AFF_PAGE===1?'disabled':'')+' style="'+bs(AFF_PAGE===1)+'">&#8249;</button>' +
+        '<button onclick="setAffPage('+(AFF_PAGE+1)+')" '+(AFF_PAGE>=totalP?'disabled':'')+' style="'+bs(AFF_PAGE>=totalP)+'">&#8250;</button>' +
+        '<button onclick="setAffPage('+totalP+')" '+(AFF_PAGE>=totalP?'disabled':'')+' style="'+bs(AFF_PAGE>=totalP)+'">&#187;</button>' +
+        '<span style="font-size:11px;color:var(--tx3)">Page '+AFF_PAGE+' of '+totalP+'</span>' +
+      '</div>' +
+    '</div>' +
+  '</div>';
+}
+
+function buildCommissionsContent() {
+  var filtered = getComFiltered();
+  var totalP = Math.max(1,Math.ceil(filtered.length/8));
+  var paged = filtered.slice((COM_PAGE-1)*8, COM_PAGE*8);
+  var counts = {all:COMMISSIONS_DATA.length,pending:0,approved:0,paid:0};
+  COMMISSIONS_DATA.forEach(function(c){ if(counts[c.status]!==undefined) counts[c.status]++; });
+  var pendingTotal = COMMISSIONS_DATA.filter(function(c){return c.status==='pending'||c.status==='approved';}).reduce(function(s,c){return s+c.commission;},0);
+
+  var thS = 'font-size:11px;font-weight:600;color:var(--tx3);padding:9px 14px;text-align:left;border-bottom:1px solid var(--bd);background:var(--bg2)';
+  var tabBtns = ['all','pending','approved','paid'].map(function(t) {
+    var on = COM_TAB===t;
+    return '<button onclick="setComTab(\''+t+'\')" style="padding:5px 12px;font-size:11.5px;font-weight:'+(on?'600':'400')+';font-family:var(--f);border:none;border-radius:var(--r);background:'+(on?'var(--tx)':'transparent')+';color:'+(on?'var(--bg)':'var(--tx2)')+';cursor:pointer;transition:all .12s">' +
+      t.charAt(0).toUpperCase()+t.slice(1) + (t!=='all'?' ('+counts[t]+')':'') +
+    '</button>';
+  }).join('');
+  var bs = function(d){ return 'background:var(--bg);border:1px solid var(--bd);border-radius:var(--r);padding:5px 8px;font-size:13px;color:'+(d?'var(--tx3)':'var(--tx)')+';cursor:'+(d?'default':'pointer')+';opacity:'+(d?'.35':'1'); };
+
+  var rows = paged.map(function(c,i) {
+    return '<tr style="'+(i%2===0?'':'background:var(--bg2)')+'" onmouseover="connRowHover(this,1)" onmouseout="connRowHover(this,0)">' +
+      '<td style="padding:10px 14px;font-family:var(--m);font-size:11px;color:var(--tx3)">' + c.id + '</td>' +
+      '<td style="padding:10px 14px;font-size:12.5px;font-weight:600">' + c.aff + '</td>' +
+      '<td style="padding:10px 14px"><div style="font-size:12px">' + c.customer + '</div><div style="font-size:11px;color:var(--tx3)">' + c.product + '</div></td>' +
+      '<td style="padding:10px 14px;font-size:12px;color:var(--tx3)">' + c.date + '</td>' +
+      '<td style="padding:10px 14px;font-size:12px;color:var(--tx2)">' + affStatusBadge(c.type) + '</td>' +
+      '<td style="padding:10px 14px;font-family:var(--m);font-size:12px;text-align:right">$' + c.amount.toFixed(2) + '</td>' +
+      '<td style="padding:10px 14px;font-family:var(--m);font-size:12.5px;font-weight:600;color:var(--g);text-align:right">$' + c.commission.toFixed(2) + '</td>' +
+      '<td style="padding:10px 14px">' + affStatusBadge(c.status) + '</td>' +
+      '<td style="padding:10px 14px;white-space:nowrap">' +
+        (c.status==='pending'
+          ? '<button onclick="showToast(\'add\',\'Commission approved\')" class="btn btn-sm">Approve</button>'
+          : c.status==='approved'
+            ? '<button onclick="showToast(\'add\',\'Commission paid\')" class="btn btn-p btn-sm">Pay</button>'
+            : '') +
+      '</td>' +
+    '</tr>';
+  }).join('');
+
+  return '<div style="padding:.875rem 1.125rem;background:var(--ol);border:1px solid var(--ob);border-radius:var(--r2);margin-bottom:1.25rem;display:flex;align-items:center;justify-content:space-between;gap:12px">' +
+    '<div><div style="font-size:13px;font-weight:600;color:var(--or)">$' + pendingTotal.toFixed(2) + ' in unpaid commissions</div><div style="font-size:11.5px;color:var(--or);margin-top:2px">' + counts.pending + ' pending approval · ' + counts.approved + ' approved and ready to pay</div></div>' +
+    '<button class="btn btn-sm" onclick="showToast(\'add\',\'Bulk payout initiated\')" style="flex-shrink:0;font-weight:600;color:var(--or);border-color:var(--ob)">Pay all approved</button>' +
+  '</div>' +
+
+  '<div class="card">' +
+    '<div class="ch" style="flex-wrap:wrap;gap:8px">' +
+      '<div style="display:flex;gap:4px;background:var(--bg3);padding:3px;border-radius:var(--r2)">' + tabBtns + '</div>' +
+      '<div style="margin-left:auto;display:flex;gap:8px"><button class="btn btn-sm" onclick="showToast(\'add\',\'Exporting CSV\u2026\')">Export CSV</button></div>' +
+    '</div>' +
+    '<div style="overflow-x:auto"><table style="width:100%;min-width:780px;border-collapse:collapse">' +
+      '<thead><tr>' + ['ID','Affiliate','Customer','Date','Type','Sale','Commission','Status',''].map(function(h,i){ return '<th style="'+thS+(i>=5&&i<=6?';text-align:right':'')+'">'+h+'</th>'; }).join('') + '</tr></thead>' +
+      '<tbody>' + rows + '</tbody>' +
+    '</table></div>' +
+    '<div style="padding:.65rem 1.25rem;border-top:1px solid var(--bd);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">' +
+      '<span style="font-size:11px;color:var(--tx3)">' + paged.length + ' of ' + filtered.length + ' commissions</span>' +
+      '<div style="display:flex;gap:6px">' +
+        '<button onclick="setComPage('+(COM_PAGE-1)+')" '+(COM_PAGE===1?'disabled':'')+' style="'+bs(COM_PAGE===1)+'">&#8249;</button>' +
+        '<button onclick="setComPage('+(COM_PAGE+1)+')" '+(COM_PAGE>=totalP?'disabled':'')+' style="'+bs(COM_PAGE>=totalP)+'">&#8250;</button>' +
+        '<span style="font-size:11px;color:var(--tx3);line-height:2">Page '+COM_PAGE+' of '+totalP+'</span>' +
+      '</div>' +
+    '</div>' +
+  '</div>';
+}
+
+function buildAffSetupContent() {
+  var p = AFF_PROGRAM;
+
+  function row(label, content) {
+    return '<div style="display:grid;grid-template-columns:200px 1fr;gap:1.5rem;align-items:start;padding:1.25rem 1.5rem;border-bottom:1px solid var(--bg3)">' +
+      '<div><div style="font-size:13px;font-weight:600">' + label + '</div></div>' +
+      '<div>' + content + '</div>' +
+    '</div>';
+  }
+  function tgl(checked, onchange) {
+    return '<div class="tgl '+(checked?'on':'')+'" onclick="'+onchange+'"><div class="tgl-track"></div><div class="tgl-thumb"></div></div>';
+  }
+  function sel(val, options, onchange) {
+    return '<select onchange="'+onchange+'" style="font-family:var(--f);font-size:13px;padding:7px 12px;border:1px solid var(--bd);border-radius:var(--r);background:var(--bg);color:var(--tx);outline:none;-webkit-appearance:none;width:auto;min-width:180px">' +
+      options.map(function(o){ return '<option value="'+o[0]+'"'+(val===o[0]?' selected':'')+'>'+o[1]+'</option>'; }).join('') +
+    '</select>';
+  }
+  function numInp(val, placeholder, onchange) {
+    return '<input type="number" value="'+val+'" placeholder="'+placeholder+'" onchange="'+onchange+'" style="font-family:var(--f);font-size:13px;padding:7px 12px;border:1px solid var(--bd);border-radius:var(--r);background:var(--bg);color:var(--tx);outline:none;width:120px" onfocus="this.style.borderColor=\'var(--tx)\'" onblur="this.style.borderColor=\'var(--bd)\'">';
+  }
+
+  return '<div class="page-centered">' +
+
+    // Share link
+    '<div class="card" style="margin-bottom:1.25rem">' +
+      '<div class="ch"><span class="ct">Your affiliate signup link</span></div>' +
+      '<div class="cb" style="display:flex;align-items:center;gap:12px">' +
+        '<div style="flex:1;display:flex;align-items:center;gap:8px;padding:9px 14px;background:var(--bg2);border:1px solid var(--bd);border-radius:8px">' +
+          '<svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="opacity:.4;flex-shrink:0"><path d="M6 8a2.5 2.5 0 0 0 3.54 0l1.5-1.5a2.5 2.5 0 0 0-3.54-3.54l-.86.85" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><path d="M8 6a2.5 2.5 0 0 0-3.54 0L3 7.5A2.5 2.5 0 0 0 6.54 11l.85-.86" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>' +
+          '<span style="font-family:var(--m);font-size:12px;color:var(--tx2)">suby.fi/affiliates/join</span>' +
+        '</div>' +
+        '<button class="btn btn-sm" onclick="showToast(\'add\',\'Link copied\')">Copy link</button>' +
+        '<button class="btn btn-sm" onclick="showToast(\'add\',\'Opening\u2026\')">Preview</button>' +
+      '</div>' +
+    '</div>' +
+
+    '<div class="card" style="margin-bottom:1.25rem">' +
+      '<div class="ch"><span class="ct">Commission structure</span></div>' +
+      row('Commission type',
+        '<div style="display:flex;gap:8px">' +
+          ['percent','flat'].map(function(t){
+            var on = p.commissionType===t;
+            var label = t==='percent' ? 'Percentage' : 'Flat rate';
+            return '<div onclick="AFF_PROGRAM.commissionType=\''+t+'\';buildAffSetupPage()" style="display:flex;align-items:center;gap:7px;padding:7px 14px;border:1.5px solid '+(on?'var(--tx)':'var(--bd)')+';border-radius:8px;cursor:pointer;background:'+(on?'var(--bg)':'var(--bg2)')+';font-size:12px;font-weight:'+(on?'600':'400')+'">'+label+'</div>';
+          }).join('') +
+        '</div>'
+      ) +
+      row('Commission rate',
+        '<div style="display:flex;align-items:center;gap:8px">' +
+          numInp(p.commissionRate,'e.g. 30','AFF_PROGRAM.commissionRate=parseInt(this.value)') +
+          '<span style="font-size:13px;color:var(--tx3)">' + (p.commissionType==='percent' ? '% of sale amount' : 'USD per conversion') + '</span>' +
+        '</div>'
+      ) +
+      row('Commission duration',
+        sel(p.commissionDuration, [
+          ['first','First payment only'],
+          ['months','Fixed number of months'],
+          ['lifetime','Lifetime (recurring)'],
+        ], 'AFF_PROGRAM.commissionDuration=this.value') +
+        (p.commissionDuration==='months'
+          ? '<div style="margin-top:8px;display:flex;align-items:center;gap:8px">' + numInp(p.commissionMonths,'12','AFF_PROGRAM.commissionMonths=parseInt(this.value)') + '<span style="font-size:12px;color:var(--tx3)">months</span></div>'
+          : '')
+      ) +
+    '</div>' +
+
+    '<div class="card" style="margin-bottom:1.25rem">' +
+      '<div class="ch"><span class="ct">Tracking & payouts</span></div>' +
+      row('Cookie duration',
+        '<div style="display:flex;align-items:center;gap:8px">' +
+          numInp(p.cookieDays,'60','AFF_PROGRAM.cookieDays=parseInt(this.value)') +
+          '<span style="font-size:12px;color:var(--tx3)">days — window for attribution</span>' +
+        '</div>'
+      ) +
+      row('Minimum payout',
+        '<div style="display:flex;align-items:center;gap:8px"><span style="font-size:13px;color:var(--tx3)">$</span>' +
+          numInp(p.minPayout,'50','AFF_PROGRAM.minPayout=parseInt(this.value)') +
+          '<span style="font-size:12px;color:var(--tx3)">USD — affiliates must reach this before payout</span>' +
+        '</div>'
+      ) +
+      row('Self-referral', tgl(p.selfReferral,'AFF_PROGRAM.selfReferral=!AFF_PROGRAM.selfReferral') + '<div style="margin-top:4px;font-size:11.5px;color:var(--tx3)">Allow affiliates to earn commission on their own purchases</div>') +
+    '</div>' +
+
+    '<div style="display:flex;justify-content:flex-end;gap:8px">' +
+      '<button class="btn" onclick="showToast(\'add\',\'Changes discarded\')">Discard</button>' +
+      '<button class="btn btn-p" onclick="showToast(\'add\',\'Program saved\')">Save changes</button>' +
+    '</div>' +
+
+  '</div>';
+}
+
+function buildAffSetupPage() {
+  var pg = document.getElementById('p-affiliate-setup');
+  if (!pg) return;
+  pg.innerHTML = '<div class="ph"><h2>Program setup</h2><p>Configure your affiliate program — commission, tracking and payout rules.</p></div>' + buildAffSetupContent();
+  pg.dataset.built = '1';
+}
 
 // ─── INIT ─────────────────────────────────────────────────────────────────────
 (function init() {
