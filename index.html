@@ -1607,11 +1607,12 @@ function showMobDrawer() {
   // Build drawer items from current sidebar state
   var sections = [
     {label:'Analytics',     page:'analytics-overview',      ico:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M3 20h18M5 20V12M9 20V8M13 20V4M17 20v-6"/></svg>'},
+    {label:'Affiliate',     page:'affiliate-overview',      ico:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><circle cx="12" cy="6" r="3"/><circle cx="4" cy="18" r="2"/><circle cx="20" cy="18" r="2"/><path d="M12 9c0 3-2 5-4 7M12 9c0 3 2 5 4 7"/></svg>'},
+    {label:'Customers',     page:'product-customers',       ico:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><path d="M16 3.13a4 4 0 0 1 0 7.75M21 21v-2a4 4 0 0 0-3-3.87"/></svg>'},
     {label:'Integration',   page:'connections-overview',    ico:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><circle cx="4" cy="12" r="2"/><circle cx="20" cy="6" r="2"/><circle cx="20" cy="18" r="2"/><path d="M6 12h6M14 7l6-1M14 17l6 1"/></svg>'},
     {label:'Risk',          page:'risk-fraud',              ico:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>'},
     {label:'Intelligence',  page:'intelligence-insights',   ico:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v3M12 20v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M1 12h3M20 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>'},
     {label:'Notifications', page:'notifications-channels',  ico:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 0 1-3.46 0"/></svg>'},
-    {label:'Customers',     page:'product-customers',       ico:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><path d="M16 3.13a4 4 0 0 1 0 7.75M21 21v-2a4 4 0 0 0-3-3.87"/></svg>'},
     {label:'Settings',      page:'config-settings',         ico:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>'},
     {label:'Customize',     page:'customize',               ico:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>'},
     {label:'New product',   page:'product-newproduct',      ico:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4M9 10h6M12 7v6"/></svg>', accent:true},
@@ -3421,7 +3422,7 @@ var PAGE_CONTENT = {
       mkInsight('blue','Your top 12 customers account for 61% of MRR. Consider a loyalty or early-access offer to lock in retention before renewal.') +
       mkInsight('green','USDC payouts are settling 18x faster than your EUR bank wires this month. $1,000 settled same-day vs T+2.') +
     '</div></div>'},
-  'intelligence-cohorts': {t:'Intelligence - Customer Cohorts', b:
+  'intelligence-cohorts': {t:'Customer cohorts', b:
     '<div class="g4" style="margin-bottom:1.25rem">'+
       mkKpi('M1 retention','84%','dlu','+3pp','vs prev cohort')+
       mkKpi('M3 retention','71%','dlu','+1pp','')+
@@ -3442,7 +3443,7 @@ var PAGE_CONTENT = {
           return '<td style="padding:9px 14px;text-align:center;border-bottom:1px solid var(--bg3);font-family:var(--m);font-size:12px;font-weight:600;color:'+c+'">'+v+'%</td>';
         }).join('')+'</tr>';
     }).join('')+'</tbody></table></div></div>'},
-  'intelligence-benchmarks': {t:'Intelligence - Benchmarks', b:
+  'intelligence-benchmarks': {t:'Benchmarks', b:
     '<div style="margin-bottom:1.25rem;padding:.875rem 1.125rem;background:var(--bll);border:1px solid var(--blb);border-radius:var(--r2);font-size:12px;color:#2e4a6a;line-height:1.6">Benchmarks compare your metrics against similar merchants on Suby (SaaS &middot; $10k-$100k MRR &middot; Europe). Updated weekly.</div>'+
     '<div class="g3" style="margin-bottom:1.25rem">'+
       mkKpi('Your auth rate','94.2%','dlu','+2.1pp vs avg 92.1%','')+
@@ -4639,16 +4640,36 @@ function npGoSection(n) { }
 
 
 var TXS = [
-  {id:'txn_8kX2',c:'Mathieu D.',p:'Premium plan',m:'Visa',a:'€29',s:'paid',d:'Mar 16, 16:42'},
-  {id:'txn_9nY3',c:'Sarah K.',p:'Pro plan',m:'Apple Pay',a:'$49',s:'paid',d:'Mar 16, 15:18'},
-  {id:'txn_2bW1',c:'Tom R.',p:'Lifetime',m:'SEPA',a:'€99',s:'paid',d:'Mar 16, 14:55'},
-  {id:'txn_5hK7',c:'Priya M.',p:'Team plan',m:'Mastercard',a:'£89',s:'paid',d:'Mar 16, 14:30'},
-  {id:'txn_3jP9',c:'Alex B.',p:'Basic plan',m:'Visa',a:'€9',s:'failed',d:'Mar 16, 13:12'},
-  {id:'txn_7mR4',c:'Julie F.',p:'Premium plan',m:'Bancontact',a:'€29',s:'paid',d:'Mar 16, 12:48'},
-  {id:'txn_1aT6',c:'Carlos V.',p:'Pro plan',m:'Visa',a:'$49',s:'paid',d:'Mar 16, 12:05'},
-  {id:'txn_4cU8',c:'Emma T.',p:'Starter',m:'iDEAL',a:'€30',s:'refunded',d:'Mar 16, 11:30'},
-  {id:'txn_6dV2',c:'Lucas M.',p:'Premium plan',m:'Mastercard',a:'€29',s:'paid',d:'Mar 16, 10:55'},
-  {id:'txn_0eX5',c:'Anna S.',p:'Lifetime',m:'USDC',a:'$99',s:'paid',d:'Mar 16, 10:22'},
+  {id:'txn_8kX2',c:'Mathieu D.',p:'Premium plan',m:'Visa',a:'€29',s:'paid',d:'Mar 24, 16:42'},
+  {id:'txn_9nY3',c:'Sarah K.',p:'Pro plan',m:'Apple Pay',a:'$49',s:'paid',d:'Mar 24, 15:18'},
+  {id:'txn_2bW1',c:'Tom R.',p:'Lifetime deal',m:'SEPA',a:'€99',s:'paid',d:'Mar 24, 14:55'},
+  {id:'txn_5hK7',c:'Priya M.',p:'Team plan',m:'Mastercard',a:'£89',s:'paid',d:'Mar 24, 14:30'},
+  {id:'txn_3jP9',c:'Alex B.',p:'Pro plan',m:'Visa',a:'$49',s:'failed',d:'Mar 24, 13:12'},
+  {id:'txn_7mR4',c:'Julie F.',p:'Premium plan',m:'Bancontact',a:'€29',s:'paid',d:'Mar 24, 12:48'},
+  {id:'txn_1aT6',c:'Carlos V.',p:'Pro plan',m:'Visa',a:'$49',s:'paid',d:'Mar 24, 12:05'},
+  {id:'txn_4cU8',c:'Emma T.',p:'Starter',m:'iDEAL',a:'€19',s:'refunded',d:'Mar 24, 11:30'},
+  {id:'txn_6dV2',c:'Lucas M.',p:'Premium plan',m:'Mastercard',a:'€29',s:'paid',d:'Mar 24, 10:55'},
+  {id:'txn_0eX5',c:'Anna S.',p:'Lifetime deal',m:'USDC',a:'$99',s:'paid',d:'Mar 24, 10:22'},
+  {id:'txn_Ak3n',c:'David K.',p:'Team plan',m:'Amex',a:'$89',s:'paid',d:'Mar 23, 18:12'},
+  {id:'txn_Bm7p',c:'Nadia R.',p:'Pro plan',m:'Apple Pay',a:'$49',s:'paid',d:'Mar 23, 17:44'},
+  {id:'txn_Cq2w',c:'Marc L.',p:'Starter',m:'SEPA',a:'€19',s:'paid',d:'Mar 23, 16:30'},
+  {id:'txn_Dv5e',c:'Yuki T.',p:'Premium plan',m:'Visa',a:'€29',s:'paid',d:'Mar 23, 15:52'},
+  {id:'txn_Er8r',c:'Fiona H.',p:'Team plan',m:'Mastercard',a:'£89',s:'failed',d:'Mar 23, 14:20'},
+  {id:'txn_Ft1t',c:'Pedro A.',p:'Pro plan',m:'Visa',a:'$49',s:'paid',d:'Mar 23, 13:08'},
+  {id:'txn_Gu4y',c:'Sophie M.',p:'Starter',m:'iDEAL',a:'€19',s:'paid',d:'Mar 23, 12:45'},
+  {id:'txn_Hj9u',c:'Omar S.',p:'Lifetime deal',m:'Mastercard',a:'€99',s:'paid',d:'Mar 23, 11:33'},
+  {id:'txn_Ik6i',c:'Lin W.',p:'Premium plan',m:'UnionPay',a:'¥199',s:'paid',d:'Mar 23, 10:18'},
+  {id:'txn_Jl3o',c:'Claire D.',p:'Pro plan',m:'Visa',a:'$49',s:'paid',d:'Mar 23, 09:55'},
+  {id:'txn_Km8p',c:'Ravi N.',p:'Team plan',m:'Apple Pay',a:'$89',s:'paid',d:'Mar 22, 19:22'},
+  {id:'txn_Ln2a',c:'Hana K.',p:'Starter',m:'SEPA',a:'€19',s:'refunded',d:'Mar 22, 18:10'},
+  {id:'txn_Mo5s',c:'Felix B.',p:'Premium plan',m:'Bancontact',a:'€29',s:'paid',d:'Mar 22, 17:05'},
+  {id:'txn_Np7d',c:'Isabelle C.',p:'Pro plan',m:'Visa',a:'$49',s:'paid',d:'Mar 22, 16:48'},
+  {id:'txn_Oq1f',c:'Kenji Y.',p:'Lifetime deal',m:'USDC',a:'$99',s:'paid',d:'Mar 22, 15:30'},
+  {id:'txn_Pr4g',c:'Astrid L.',p:'Team plan',m:'Mastercard',a:'£89',s:'paid',d:'Mar 22, 14:12'},
+  {id:'txn_Qs6h',c:'Bruno M.',p:'Pro plan',m:'Visa',a:'$49',s:'failed',d:'Mar 22, 13:00'},
+  {id:'txn_Rt9j',c:'Zara A.',p:'Starter',m:'iDEAL',a:'€19',s:'paid',d:'Mar 22, 11:45'},
+  {id:'txn_Su2k',c:'Ethan W.',p:'Premium plan',m:'Apple Pay',a:'€29',s:'paid',d:'Mar 22, 10:38'},
+  {id:'txn_Tv5l',c:'Mei X.',p:'Team plan',m:'Alipay',a:'¥599',s:'paid',d:'Mar 22, 09:22'},
 ];
 
 var TX_SEARCH = '';
@@ -5148,511 +5169,91 @@ function mkQuickLink(title, sub, action, ico) {
 }
 
 function buildHome() {
-  var hasTx = saved.has('payment') && saved.get('payment').has('transactions');
-  var hasAnalytics = saved.has('analytics');
-  var hasIntel = saved.has('intelligence');
+  var pg = document.getElementById('p-home');
+  if (!pg) return;
 
-  // Pre-payment mode: show action-oriented setup home
+  var hasTx      = saved.has('payment') && saved.get('payment').has('transactions');
+  var hasAnalytics = saved.has('analytics');
+  var hasPayouts = saved.has('payouts');
+  var hasProd    = saved.has('product');
+
+  // Pre-payment state
   if (!CHECKLIST.hasFirstPayment) {
     buildHomePrePayment();
     return;
   }
 
-  // Recent transactions rows
-  var SBL={paid:'dlu',failed:'dld',refunded:'dln'};
-  var LBL={paid:'Paid',failed:'Failed',refunded:'Refunded'};
-  var txRows = TXS.slice(0,6).map(function(t){
-    return '<div style="display:flex;align-items:center;gap:10px;padding:9px 1.125rem;border-bottom:1px solid var(--bd);transition:background .1s" onmouseover="connRowHover(this,1)" onmouseout="connRowHover(this,0)">' +
-      '<div style="flex:1;min-width:0"><div style="font-size:12px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+t.c+'</div><div style="font-size:11px;color:var(--tx3)">'+t.p+' &middot; '+t.m+'</div></div>' +
-      '<div style="font-family:var(--m);font-size:12px;font-weight:500">'+t.a+'</div>' +
-      '<span class="dl '+SBL[t.s]+'" style="font-size:10px">'+LBL[t.s]+'</span>' +
-    '</div>';
-  }).join('');
+  // ── KPIs ──────────────────────────────────────────────────────────────────
+  var kpis = '<div class="g4" style="margin-bottom:1.25rem">' +
+    mkKpi('Revenue today','$3,842','dlu','+12%','vs yesterday') +
+    mkKpi('MRR','$45,231','dlu','+20.1%','vs last month') +
+    mkKpi('Active subscribers','1,204','dlu','+9.3%','') +
+    mkKpi('Auth rate','94.2%','dlu','+0.3pp','last 7 days') +
+  '</div>';
 
-  // Revenue sparkline data (last 14 days)
-  var revDays = [2840,3120,2980,3380,3640,3210,3580,3890,3540,3960,4120,3840,4080,3840];
-  var revMax = Math.max.apply(null,revDays);
-  var sparkH = 40;
-  var sparkPts = revDays.map(function(v,i){
-    return (i*(200/(revDays.length-1)))+','+(sparkH - Math.round((v/revMax)*sparkH));
-  }).join(' ');
+  // ── Auth rate alert ────────────────────────────────────────────────────────
+  var alert = '<div style="display:flex;align-items:flex-start;gap:10px;padding:.875rem 1.125rem;background:var(--ol);border:1px solid var(--ob);border-radius:var(--r2);margin-bottom:1.25rem;font-size:12px;color:var(--or);line-height:1.55">' +
+    '<svg width="15" height="15" viewBox="0 0 15 15" fill="none" style="flex-shrink:0;margin-top:1px"><path d="M7.5 1.5L13.5 12H1.5L7.5 1.5Z" stroke="var(--or)" stroke-width="1.3" stroke-linejoin="round"/><path d="M7.5 6v3M7.5 10.5v.5" stroke="var(--or)" stroke-width="1.3" stroke-linecap="round"/></svg>' +
+    '<div><strong>Auth rate dropped 1.4pp on Mastercard yesterday.</strong> Review decline breakdown to identify the cause — estimated $340/month impact. <span style="text-decoration:underline;cursor:pointer;font-weight:600" onclick="goPage(\'payment-decline\')">View analysis →</span></div>' +
+  '</div>';
 
-  // Alert if any
-  var alertHtml = '';
-  // simulate a warning - auth rate dip
-  alertHtml = '<div style="display:flex;align-items:flex-start;gap:10px;padding:.875rem 1.125rem;border-radius:var(--r2);border:1px solid var(--ab);background:var(--al);margin-bottom:1.25rem;cursor:pointer" onclick="goPage(\'analytics-acceptance\')">' +
-    '<svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;margin-top:1px"><path d="M7 1.5L13 12.5H1L7 1.5Z" stroke="#4a6fa5" stroke-width="1.3" stroke-linejoin="round"/><path d="M7 6v3M7 10.5v.5" stroke="#4a6fa5" stroke-width="1.3" stroke-linecap="round"/></svg>' +
-    '<div style="flex:1"><div style="font-size:12px;font-weight:600;color:#3d5a80">Auth rate dipped to 90.0% this morning - $892 in estimated lost revenue</div>' +
-    '<div style="font-size:11px;color:#3d5a80;margin-top:2px">Top reason: insufficient_funds (+18pp). Visa most affected. <span style="font-weight:600;text-decoration:underline">View decline analysis →</span></div>' +
-    '</div><button style="flex-shrink:0;background:none;border:none;cursor:pointer;color:#3d5a80;font-size:14px;line-height:1;opacity:.5;padding:0 2px" onclick="event.stopPropagation();this.closest(\'div\').remove()">&times;</button></div>';
+  // ── Checklist ─────────────────────────────────────────────────────────────
+  var checklist = buildChecklistHtml();
 
-  // Payout rows
-  var payoutRows = [
-    ['Stripe EUR','T+2 &middot; Mar 18','$7,240','#09090b'],
-    ['Stripe USD','T+2 &middot; Mar 18','$3,180','#71717a'],
-    ['USDC (Base)','Near-instant &middot; ready','$1,000','#1a2db8'],
-  ].map(function(r){
-    return '<div style="display:flex;align-items:center;gap:8px;padding:5px 0">' +
-      '<div style="width:7px;height:7px;border-radius:2px;background:'+r[3]+';flex-shrink:0"></div>' +
-      '<div style="flex:1"><span style="font-size:12px;font-weight:500">'+r[0]+'</span><span style="font-size:11px;color:var(--tx3);margin-left:6px">'+r[1]+'</span></div>' +
-      '<span style="font-family:var(--m);font-size:12px;font-weight:600">'+r[2]+'</span>' +
-    '</div>';
-  }).join('');
-
-  // Intelligence insight (if active)
-  var intelHtml = '';
-  if (hasIntel) {
-    intelHtml = '<div class="card" style="margin-bottom:1.25rem">' +
-      '<div class="ch" style="background:var(--bll)">' +
-        '<div style="display:flex;align-items:center;gap:6px">' +
-          '<svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11Z" stroke="#3d5a80" stroke-width="1.2"/><path d="M6.5 4v3l1.5 1.5" stroke="#3d5a80" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
-          '<span class="ct" style="color:#2e4a6a">Intelligence</span>' +
-        '</div>' +
-        '<button class="btn btn-sm" onclick="goPage(\'intelligence-insights\')" style="font-size:11px">View all</button>' +
-      '</div>' +
-      '<div style="display:flex;flex-direction:column;gap:0">' +
-        [['var(--g)','Auth rate improved +1.2pp this week - Visa cards leading the gain.'],
-         ['var(--am)','4 renewals failed. $196 recoverable - cards are active in the network.'],
-         ['var(--bl)','Top 12 customers = 61% of MRR. Consider a loyalty or early-access offer.']].map(function(r,i){
-          return '<div style="display:flex;align-items:flex-start;gap:10px;padding:.75rem 1.125rem;border-bottom:1px solid var(--bg3)">' +
-            '<div style="width:6px;height:6px;border-radius:50%;background:'+r[0]+';flex-shrink:0;margin-top:4px"></div>' +
-            '<div style="font-size:12px;color:var(--tx2);line-height:1.6">'+r[1]+'</div>' +
-          '</div>';
-        }).join('')+
-      '</div>' +
+  // ── Recent transactions + next payout ─────────────────────────────────────
+  var recentTx = '';
+  if (hasTx) {
+    var txSlice = TXS.slice(0,6);
+    var txRows = txSlice.map(function(t) {
+      var color = t.s==='paid' ? 'var(--g)' : t.s==='failed' ? 'var(--re)' : 'var(--am)';
+      var label = t.s.charAt(0).toUpperCase()+t.s.slice(1);
+      return '<div style="display:flex;align-items:center;gap:12px;padding:9px 1.125rem;border-bottom:1px solid var(--bg3)">' +
+        '<div style="flex:1;min-width:0"><div style="font-size:12.5px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+t.c+'</div><div style="font-size:11px;color:var(--tx3)">'+t.p+'</div></div>' +
+        '<div style="font-size:11px;color:var(--tx3);white-space:nowrap">'+t.m+'</div>' +
+        '<div style="font-family:var(--m);font-size:12.5px;font-weight:600;min-width:48px;text-align:right">'+t.a+'</div>' +
+        '<span class="dl" style="color:'+color+';background:'+color+'18;min-width:52px;text-align:center">'+label+'</span>' +
+      '</div>';
+    }).join('');
+    recentTx = '<div class="card" style="margin-bottom:1.25rem">' +
+      '<div class="ch"><span class="ct">Recent transactions</span><button class="btn btn-sm" onclick="goPage(\'payment-transactions\')">View all</button></div>' +
+      txRows +
     '</div>';
   }
 
-  document.getElementById('p-home').innerHTML =
-    // Header
-    '<div style="margin-bottom:1.5rem;display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;flex-wrap:wrap">' +
-      '<div>' +
-        '<h2 style="font-size:20px;font-weight:600;letter-spacing:-.03em">Good morning, Gaspard</h2>' +
-        '<p style="font-size:12px;color:var(--tx3);margin-top:3px">Monday, March 16, 2026 &middot; <span style="color:var(--re);font-weight:500">Auth rate alert</span></p>' +
-      '</div>' +
-      '<div style="display:flex;gap:6px">' +
-        '<button class="btn btn-sm">↓ Export</button>' +
-        '<button class="btn btn-p btn-sm" onclick="goPage(\'product-newproduct\')">+ New product</button>' +
-      '</div>' +
-    '</div>' +
-
-    // Checklist
-    buildChecklistHtml() +
-
-    // Alert
-    alertHtml +
-
-    // KPI row - 4 cards, revenue has sparkline
-    '<div class="g4" style="margin-bottom:1.25rem">' +
-      // Revenue - wider with sparkline
-      '<div class="card" style="grid-column:span 2">' +
-        '<div style="display:flex;align-items:flex-start;justify-content:space-between;padding:1rem 1.125rem .5rem;gap:1rem">' +
-          '<div>' +
-            '<div style="font-size:11px;font-weight:500;color:var(--tx3)">Revenue today</div>' +
-            '<div style="font-size:26px;font-weight:600;letter-spacing:-.04em;line-height:1.1;margin-top:.15rem">$3,840</div>' +
-            '<div style="display:flex;align-items:center;gap:5px;margin-top:.3rem">' +
-              '<span class="dl dlu">+22%</span><span class="kn">vs yesterday</span>' +
-              '<span style="color:var(--tx3);margin:0 4px">&middot;</span>' +
-              '<span class="kn">$84,320 this month</span>' +
-            '</div>' +
-          '</div>' +
-          '<svg width="200" height="40" viewBox="0 0 200 40" fill="none" style="flex-shrink:0">' +
-            '<polyline points="'+sparkPts+'" stroke="var(--g)" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" fill="none"/>' +
-            '<circle cx="200" cy="'+sparkPts.split(' ').pop().split(',')[1]+'" r="3" fill="var(--g)"/>' +
-          '</svg>' +
-        '</div>' +
-      '</div>' +
-
-      '<div class="card kpi">' +
-        '<div class="kl">Auth rate</div>' +
-        '<div class="kv" style="color:var(--re)">90.0%</div>' +
-        '<div class="ks"><span class="dl dld">&minus;4.2pp</span><span class="kn">this morning</span></div>' +
-      '</div>' +
-
-      '<div class="card kpi">' +
-        '<div class="kl">MRR</div>' +
-        '<div class="kv">$38,240</div>' +
-        '<div class="ks"><span class="dl dlu">+$3,400</span><span class="kn">this month</span></div>' +
-      '</div>' +
-    '</div>' +
-
-    // Intelligence + Payout row
-    intelHtml +
-
-    // Bottom grid: transactions + payout
-    '<div class="g2">' +
-
-      // Transactions
-      '<div class="card">' +
-        '<div class="ch">' +
-          '<span class="ct">Recent transactions</span>' +
-          '<div style="display:flex;align-items:center;gap:6px">' +
-            '<span style="font-family:var(--m);font-size:11px;font-weight:600;color:var(--g)">132 today</span>' +
-            (hasTx ? '<button class="btn btn-sm" onclick="goPage(\'payment-transactions\')">View all</button>' : '') +
-          '</div>' +
-        '</div>' +
-        txRows +
-      '</div>' +
-
-      // Right column: payout + quick stats
-      '<div style="display:flex;flex-direction:column;gap:12px">' +
-
-        // Next payout
-        '<div class="card">' +
-          '<div class="ch"><span class="ct">Next payout</span><span class="cm">Mar 18, 2026</span></div>' +
-          '<div class="cb">' +
-            '<div style="font-size:24px;font-weight:600;letter-spacing:-.04em;margin-bottom:3px">$11,420</div>' +
-            '<div style="font-size:11px;color:var(--tx3);margin-bottom:.875rem">Across 3 destinations &middot; T+2</div>' +
-            '<div style="display:flex;flex-direction:column;gap:7px">'+payoutRows+'</div>' +
-          '</div>' +
-        '</div>' +
-
-        // Quick stats
-        '<div class="card">' +
-          '<div class="ch"><span class="ct">This month</span></div>' +
-          '<div class="cb" style="display:flex;flex-direction:column;gap:8px">' +
-            [['Active subscribers','1,204','var(--g)'],['New customers','142','var(--bl)'],['Churned','38','var(--re)'],['Open disputes','7','var(--am)']].map(function(r){
-              return '<div style="display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-bottom:1px solid var(--bg3)">' +
-                '<span style="font-size:12px;color:var(--tx2)">'+r[0]+'</span>' +
-                '<span style="font-family:var(--m);font-size:13px;font-weight:700;color:'+r[2]+'">'+r[1]+'</span>' +
-              '</div>';
-            }).join('')+
-          '</div>' +
-        '</div>' +
-
-      '</div>' +
-    '</div>' +
-
-    // Contextual connection cards
-    (function() {
-      var ucs = OB.useCases.length ? OB.useCases : (OB.useCase ? [OB.useCase] : []);
-      return buildHomeConnCards(ucs);
-    })();
-}
-
-
-// ─── TOAST ────────────────────────────────────────────────────────────────────
-function showToast(type, msg) {
-  var t = document.getElementById('toast');
-  if (!t) return;
-  document.getElementById('t-ico').innerHTML = type==='add'
-    ? '<svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 6.5l3 3 6-5" stroke="#6abf8a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>'
-    : '<svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2.5 2.5l8 8M10.5 2.5l-8 8" stroke="#f87171" stroke-width="1.5" stroke-linecap="round"/></svg>';
-  document.getElementById('t-msg').textContent = msg;
-  t.classList.add('on');
-  clearTimeout(t._t);
-  t._t = setTimeout(function(){ t.classList.remove('on'); }, 2500);
-}
-
-// ─── RENDER ICONS (no-op — all SVGs inlined) ──────────────────────────────────
-function renderIcons() {}
-
-// ─── START ONBOARDING (removed — stub for compatibility) ──────────────────────
-
-// ─── SUPPORT MODAL ────────────────────────────────────────────────────────────
-function toggleSupportModal() {
-  var m   = document.getElementById('support-modal');
-  var fab = document.getElementById('support-fab');
-  if (!m) return;
-  var open = m.style.display === 'flex';
-  m.style.display = open ? 'none' : 'flex';
-  if (fab) {
-    fab.style.transform  = open ? '' : 'scale(.92)';
-    fab.style.boxShadow  = open ? '0 4px 16px rgba(0,0,0,.18)' : '0 2px 8px rgba(0,0,0,.12)';
-  }
-}
-
-// ─── ADD BANK MODAL ───────────────────────────────────────────────────────────
-// ─── USDC PAYOUT MODAL ───────────────────────────────────────────────────────
-var USDC_FORM = { wallet:'', network:'base', checks:[false,false,false] };
-var USDC_NETWORKS = [
-  { id:'solana',   name:'Solana',   hint:'Standard Solana address (base58). Use Phantom, Backpack or Ledger.' },
-  { id:'base',     name:'Base',     hint:'ERC-20 address starting with 0x. MetaMask or Ledger recommended.' },
-  { id:'arbitrum', name:'Arbitrum', hint:'ERC-20 address starting with 0x. MetaMask or Ledger recommended.' },
-];
-
-function showAddUsdcModal() {
-  USDC_FORM = { wallet:'', network:'base', checks:[false,false,false] };
-  var m = document.getElementById('add-usdc-modal');
-  if (!m) {
-    m = document.createElement('div');
-    m.id = 'add-usdc-modal';
-    m.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.45);backdrop-filter:blur(4px);z-index:400;display:flex;align-items:center;justify-content:center;padding:1rem;animation:fi .15s ease';
-    m.addEventListener('click', function(e){ if(e.target===m) hideAddUsdcModal(); });
-    document.body.appendChild(m);
-  }
-  m.style.display = 'flex';
-  renderAddUsdcModal();
-}
-
-function hideAddUsdcModal() {
-  var m = document.getElementById('add-usdc-modal');
-  if (m) m.style.display = 'none';
-}
-
-function usdcSetNetwork(id) {
-  USDC_FORM.network = id;
-  renderAddUsdcModal();
-}
-
-function usdcToggleCheck(i) {
-  USDC_FORM.checks[i] = !USDC_FORM.checks[i];
-  renderAddUsdcModal();
-}
-
-function usdcWalletInput(v) {
-  USDC_FORM.wallet = v;
-  var net = USDC_FORM.network;
-  var valid = net === 'solana'
-    ? /^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(v.trim())
-    : /^0x[0-9a-fA-F]{40}$/.test(v.trim());
-  var ind = document.getElementById('usdc-valid-ind');
-  if (ind) {
-    if (!v.trim()) { ind.innerHTML = ''; return; }
-    ind.innerHTML = valid
-      ? '<svg width="13" height="13" viewBox="0 0 13 13" fill="none"><circle cx="6.5" cy="6.5" r="5.5" fill="#287a50" opacity=".15"/><path d="M3.5 6.5l2 2 4-4" stroke="#287a50" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span style="color:#287a50;font-size:11px;font-weight:500">Valid address</span>'
-      : '<svg width="13" height="13" viewBox="0 0 13 13" fill="none"><circle cx="6.5" cy="6.5" r="5.5" fill="#b03030" opacity=".12"/><path d="M4.5 4.5l4 4M8.5 4.5l-4 4" stroke="#b03030" stroke-width="1.3" stroke-linecap="round"/></svg><span style="color:#b03030;font-size:11px;font-weight:500">Invalid format</span>';
-  }
-}
-
-function renderAddUsdcModal() {
-  var m = document.getElementById('add-usdc-modal');
-  if (!m) return;
-  var selNet = USDC_NETWORKS.find(function(n){ return n.id === USDC_FORM.network; }) || USDC_NETWORKS[1];
-
-  var networkPills = USDC_NETWORKS.map(function(n) {
-    var on = USDC_FORM.network === n.id;
-    return '<button onclick="usdcSetNetwork(\''+n.id+'\')" style="flex:1;padding:7px 10px;border:1.5px solid '+(on?'var(--tx)':'var(--bd)')+';border-radius:8px;background:'+(on?'var(--bg)':'var(--bg2)')+';font-family:var(--f);font-size:12px;font-weight:'+(on?'600':'400')+';color:'+(on?'var(--tx)':'var(--tx3)')+';cursor:pointer;transition:all .12s">'+n.name+'</button>';
-  }).join('');
-
-  var checks = [
-    'I\'m using a <strong>self-custodial wallet</strong> (Phantom, MetaMask, Ledger\u2026) \u2014 not a CEX',
-    'This address supports <strong>USDC on the selected network</strong> \u2014 wrong network means permanent loss',
-    'I\'ve <strong>double-checked the address</strong> \u2014 crypto transactions cannot be reversed',
-  ];
-  var checksHtml = checks.map(function(c, i) {
-    var on = USDC_FORM.checks[i];
-    return '<div onclick="usdcToggleCheck('+i+')" style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border:1px solid '+(on?'var(--tx)':'var(--bd)')+';border-radius:8px;cursor:pointer;background:'+(on?'var(--bg)':'var(--bg2)')+';margin-bottom:6px;transition:all .12s">'+
-      '<div style="width:16px;height:16px;border-radius:4px;border:1.5px solid '+(on?'var(--tx)':'var(--bd2)')+';background:'+(on?'var(--tx)':'none')+';display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px">'+
-        (on?'<svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5l2 2 4-4" stroke="#fff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>':'')+
-      '</div>'+
-      '<span style="font-size:12px;line-height:1.55;color:var(--tx)">'+c+'</span>'+
+  // ── Next payout ────────────────────────────────────────────────────────────
+  var nextPayout = '';
+  if (hasPayouts) {
+    var payoutRows = [
+      ['EUR · BNP Paribas', 'Mar 26 · T+2', '$4,821', 'var(--g)'],
+      ['USDC · Base wallet', 'Near-instant', '$1,204', 'var(--bl)'],
+    ].map(function(r) {
+      return '<div style="display:flex;align-items:center;gap:12px;padding:9px 1.125rem;border-bottom:1px solid var(--bg3)">' +
+        '<div style="flex:1"><div style="font-size:12.5px;font-weight:500">'+r[0]+'</div><div style="font-size:11px;color:var(--tx3)">'+r[1]+'</div></div>' +
+        '<div style="font-family:var(--m);font-size:13px;font-weight:700;color:'+r[3]+'">'+r[2]+'</div>' +
+      '</div>';
+    }).join('');
+    nextPayout = '<div class="card" style="margin-bottom:1.25rem">' +
+      '<div class="ch"><span class="ct">Upcoming payouts</span><button class="btn btn-sm" onclick="goPage(\'payouts-overview\')">View all</button></div>' +
+      payoutRows +
     '</div>';
-  }).join('');
+  }
 
-  var allChecked = USDC_FORM.checks[0] && USDC_FORM.checks[1] && USDC_FORM.checks[2];
-  var canSave = allChecked && USDC_FORM.wallet.trim().length > 0;
+  // ── Connection cards ───────────────────────────────────────────────────────
+  var ucs = OB.useCases.length ? OB.useCases : (OB.useCase ? [OB.useCase] : []);
+  var connCards = buildHomeConnCards(ucs);
 
-  m.innerHTML =
-    '<div style="background:var(--bg);border-radius:16px;width:100%;max-width:500px;max-height:90vh;overflow-y:auto;box-shadow:0 24px 64px rgba(0,0,0,.2)">' +
-      '<div style="padding:1.25rem 1.5rem;border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between">' +
-        '<div><div style="font-size:15px;font-weight:700;letter-spacing:-.02em">Add USDC wallet</div><div style="font-size:11px;color:var(--tx3);margin-top:1px">Stablecoin payouts \u00b7 near-instant settlement</div></div>' +
-        '<button onclick="hideAddUsdcModal()" style="background:none;border:none;cursor:pointer;font-size:20px;color:var(--tx3);line-height:1;padding:4px 6px">&times;</button>' +
-      '</div>' +
-      '<div style="padding:1.25rem 1.5rem;display:flex;flex-direction:column;gap:1.125rem">' +
-        '<div>' +
-          '<div style="font-size:11.5px;font-weight:700;color:var(--tx2);margin-bottom:8px">1 \u00b7 Network</div>' +
-          '<div style="display:flex;gap:6px">'+networkPills+'</div>' +
-          '<div style="margin-top:8px;padding:8px 12px;background:var(--bg2);border:1px solid var(--bd);border-radius:7px;font-size:11.5px;color:var(--tx3)">'+selNet.hint+'</div>' +
-        '</div>' +
-        '<div>' +
-          '<div style="font-size:11.5px;font-weight:700;color:var(--tx2);margin-bottom:6px">2 \u00b7 Wallet address</div>' +
-          '<input id="usdc-wallet-inp" type="text" placeholder="Paste your wallet address\u2026" value="'+USDC_FORM.wallet+'" oninput="usdcWalletInput(this.value)" style="width:100%;font-family:var(--m);font-size:12px;padding:9px 12px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--tx);outline:none;transition:border-color .12s" onfocus="this.style.borderColor=\'var(--tx)\'" onblur="this.style.borderColor=\'var(--bd)\'">' +
-          '<div id="usdc-valid-ind" style="display:flex;align-items:center;gap:5px;margin-top:6px;min-height:16px"></div>' +
-        '</div>' +
-        '<div>' +
-          '<div style="font-size:11.5px;font-weight:700;color:var(--tx2);margin-bottom:8px">3 \u00b7 Confirm before saving</div>' +
-          checksHtml +
-        '</div>' +
-      '</div>' +
-      '<div style="padding:1rem 1.5rem;border-top:1px solid var(--bd);background:var(--bg2)">' +
-        '<button onclick="saveAddUsdc()" style="width:100%;padding:10px;border:none;border-radius:9px;background:'+(canSave?'var(--tx)':'var(--bd2)')+';color:'+(canSave?'var(--bg)':'var(--tx3)')+';font-family:var(--f);font-size:13px;font-weight:600;cursor:'+(canSave?'pointer':'default')+';transition:all .15s">Save &amp; activate</button>' +
-      '</div>' +
+  // ── Layout: left (wider) + right sidebar ──────────────────────────────────
+  pg.innerHTML =
+    '<div class="ph"><h2>Home</h2></div>' +
+    kpis +
+    (checklist ? checklist : '') +
+    alert +
+    '<div style="display:grid;grid-template-columns:1fr 320px;gap:1.25rem;align-items:start">' +
+      '<div>' + recentTx + '</div>' +
+      '<div>' + nextPayout + connCards + '</div>' +
     '</div>';
 
-  if (USDC_FORM.wallet) setTimeout(function(){ usdcWalletInput(USDC_FORM.wallet); }, 10);
-}
-
-function saveAddUsdc() {
-  if (!USDC_FORM.wallet.trim()) { showToast('err','Wallet address is required'); return; }
-  if (!USDC_FORM.checks[0] || !USDC_FORM.checks[1] || !USDC_FORM.checks[2]) { showToast('err','Please confirm all 3 checkboxes'); return; }
-  var isEvm = USDC_FORM.network !== 'solana';
-  if (isEvm && !/^0x[0-9a-fA-F]{40}$/.test(USDC_FORM.wallet.trim())) { showToast('err','Invalid EVM address \u2014 must start with 0x'); return; }
-  if (!isEvm && !/^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(USDC_FORM.wallet.trim())) { showToast('err','Invalid Solana address'); return; }
-  hideAddUsdcModal();
-  CHECKLIST.cryptoWalletAdded = true;
-  showToast('add','USDC wallet saved on ' + USDC_FORM.network + '.');
-  var pg = document.getElementById('p-payouts-destinations');
-  if (pg) { pg.dataset.built=''; pg.innerHTML=''; }
-  goPage('payouts-destinations');
-}
-
-function showAddBankModal() {
-  var m = document.getElementById('add-bank-modal');
-  if (m) { m.style.display='flex'; return; }
-  m = document.createElement('div');
-  m.id = 'add-bank-modal';
-  m.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.45);backdrop-filter:blur(4px);z-index:400;display:flex;align-items:center;justify-content:center;padding:1rem';
-  m.onclick = function(e){ if(e.target===m) m.style.display='none'; };
-
-  var box = document.createElement('div');
-  box.style.cssText = 'background:var(--bg);border-radius:16px;width:100%;max-width:460px;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,.18)';
-
-  // Header
-  var hdr = document.createElement('div');
-  hdr.style.cssText = 'padding:1.25rem 1.5rem;border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between';
-  hdr.innerHTML = '<div><div style="font-size:15px;font-weight:700;letter-spacing:-.02em">Add IBAN</div><div style="font-size:11px;color:var(--tx3);margin-top:1px">Bank transfer payouts · T+2 settlement</div></div>';
-  var closeBtn = document.createElement('button');
-  closeBtn.innerHTML = '&times;';
-  closeBtn.style.cssText = 'background:none;border:none;cursor:pointer;font-size:20px;color:var(--tx3);line-height:1;padding:4px 6px';
-  closeBtn.onclick = function(){ m.style.display='none'; };
-  hdr.appendChild(closeBtn);
-
-  // Body
-  var body = document.createElement('div');
-  body.style.cssText = 'padding:1.25rem 1.5rem;display:flex;flex-direction:column;gap:.875rem';
-
-  var ibanWrap = document.createElement('div');
-  var ibanLabel = document.createElement('label');
-  ibanLabel.style.cssText = 'display:block;font-size:11.5px;font-weight:600;color:var(--tx2);margin-bottom:5px';
-  ibanLabel.textContent = 'IBAN';
-  var ibanInput = document.createElement('input');
-  ibanInput.id = 'bank-iban-inp';
-  ibanInput.type = 'text';
-  ibanInput.placeholder = 'FR76 3000 6000 0112 3456 7890 189';
-  ibanInput.style.cssText = 'width:100%;font-family:var(--m);font-size:13px;padding:9px 12px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--tx);outline:none';
-  ibanInput.onfocus = function(){ this.style.borderColor='var(--bl)'; };
-  ibanInput.onblur  = function(){ this.style.borderColor='var(--bd)'; };
-  ibanWrap.appendChild(ibanLabel); ibanWrap.appendChild(ibanInput);
-
-  var nameWrap = document.createElement('div');
-  var nameLabel = document.createElement('label');
-  nameLabel.style.cssText = 'display:block;font-size:11.5px;font-weight:600;color:var(--tx2);margin-bottom:5px';
-  nameLabel.textContent = 'Account holder name';
-  var nameInput = document.createElement('input');
-  nameInput.type = 'text'; nameInput.placeholder = 'Gaspard Lézin';
-  nameInput.style.cssText = 'width:100%;font-family:var(--f);font-size:13px;padding:9px 12px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--tx);outline:none';
-  nameInput.onfocus = function(){ this.style.borderColor='var(--bl)'; };
-  nameInput.onblur  = function(){ this.style.borderColor='var(--bd)'; };
-  nameWrap.appendChild(nameLabel); nameWrap.appendChild(nameInput);
-
-  var note = document.createElement('div');
-  note.style.cssText = 'padding:10px 12px;background:var(--bg2);border:1px solid var(--bd);border-radius:8px;font-size:11.5px;color:var(--tx3);line-height:1.6';
-  note.textContent = 'SEPA transfers only. Funds arrive within 1–2 business days after payout cycle. Your IBAN is encrypted and never shared.';
-
-  body.appendChild(ibanWrap); body.appendChild(nameWrap); body.appendChild(note);
-
-  // Footer
-  var ftr = document.createElement('div');
-  ftr.style.cssText = 'padding:1rem 1.5rem;border-top:1px solid var(--bd);display:flex;justify-content:space-between;background:var(--bg2)';
-  var btnCancel = document.createElement('button');
-  btnCancel.className = 'btn'; btnCancel.textContent = 'Cancel';
-  btnCancel.onclick = function(){ m.style.display='none'; };
-  var btnSave = document.createElement('button');
-  btnSave.className = 'btn btn-p'; btnSave.textContent = 'Save IBAN';
-  btnSave.onclick = saveAddBank;
-  ftr.appendChild(btnCancel); ftr.appendChild(btnSave);
-
-  box.appendChild(hdr); box.appendChild(body); box.appendChild(ftr);
-  m.appendChild(box);
-  document.body.appendChild(m);
-}
-
-function saveAddBank() {
-  var inp = document.getElementById('bank-iban-inp');
-  var val = inp ? inp.value.trim().replace(/\s/g,'') : '';
-  if (!val) { showToast('err','IBAN is required'); return; }
-  var m = document.getElementById('add-bank-modal');
-  if (m) m.remove();
-  CHECKLIST.ibanAdded = true;
-  showToast('add','Bank account saved.');
-  var pg = document.getElementById('p-payouts-destinations');
-  if (pg) { pg.dataset.built=''; pg.innerHTML=''; }
-  goPage('payouts-destinations');
-}
-
-// ─── BUILD PUBLISH CONFIRM ────────────────────────────────────────────────────
-function buildPublishConfirm() {
-  var name  = NP.name  || 'Product';
-  var price = (NP.price || '0') + ' ' + (NP.currency || 'EUR');
-  var type  = NP.type === 'recurring' ? 'Subscription' : 'One-time';
-  var link  = 'pay.suby.fi/' + (NP.name||'product').toLowerCase().replace(/\s+/g,'-');
-  var pg = document.getElementById('p-product-newproduct');
-  if (!pg) return;
-  pg.innerHTML = '';
-
-  var wrap = document.createElement('div');
-  wrap.className = 'page-centered';
-  wrap.style.paddingTop = '2rem';
-
-  // Icon + heading
-  var hero = document.createElement('div');
-  hero.style.cssText = 'text-align:center;margin-bottom:2rem';
-  var ico = document.createElement('div');
-  ico.style.cssText = 'width:56px;height:56px;border-radius:50%;background:var(--gl);border:2px solid var(--gb);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem';
-  ico.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="var(--g)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-  var h2 = document.createElement('div');
-  h2.style.cssText = 'font-size:20px;font-weight:800;letter-spacing:-.03em';
-  h2.textContent = 'Product published';
-  var sub = document.createElement('p');
-  sub.style.cssText = 'font-size:13px;color:var(--tx3);margin-top:4px';
-  sub.textContent = 'Your product is live and ready to accept payments.';
-  hero.appendChild(ico); hero.appendChild(h2); hero.appendChild(sub);
-
-  // Details card
-  var card = document.createElement('div');
-  card.className = 'card';
-  card.style.marginBottom = '1rem';
-  var cb = document.createElement('div');
-  cb.className = 'cb';
-  cb.style.cssText = 'display:flex;flex-direction:column;gap:10px';
-  [['Name', name], ['Price', price], ['Type', type]].forEach(function(r) {
-    var row = document.createElement('div');
-    row.style.cssText = 'display:flex;justify-content:space-between;font-size:13px';
-    row.innerHTML = '<span style="color:var(--tx3)">'+r[0]+'</span><strong>'+r[1]+'</strong>';
-    cb.appendChild(row);
-  });
-  // Link row
-  var linkWrap = document.createElement('div');
-  linkWrap.style.cssText = 'border-top:1px solid var(--bd);padding-top:10px';
-  var linkLabel = document.createElement('div');
-  linkLabel.style.cssText = 'font-size:11.5px;color:var(--tx3);margin-bottom:6px';
-  linkLabel.textContent = 'Payment link';
-  var linkRow = document.createElement('div');
-  linkRow.style.cssText = 'display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:var(--bg2);border:1px solid var(--bd);border-radius:8px';
-  var linkText = document.createElement('span');
-  linkText.style.cssText = 'font-family:var(--m);font-size:12px;color:var(--tx2)';
-  linkText.textContent = link;
-  var copyBtn = document.createElement('button');
-  copyBtn.style.cssText = 'background:none;border:none;cursor:pointer;font-size:11px;color:var(--bl);font-weight:600;font-family:var(--f)';
-  copyBtn.textContent = 'Copy';
-  copyBtn.onclick = function(){ showToast('add','Link copied'); };
-  linkRow.appendChild(linkText); linkRow.appendChild(copyBtn);
-  linkWrap.appendChild(linkLabel); linkWrap.appendChild(linkRow);
-  cb.appendChild(linkWrap);
-  card.appendChild(cb);
-
-  // Actions
-  var actions = document.createElement('div');
-  actions.style.cssText = 'display:flex;gap:10px';
-  var btn1 = document.createElement('button');
-  btn1.className = 'btn'; btn1.style.cssText = 'flex:1;padding:10px;font-size:13px';
-  btn1.textContent = 'View all products';
-  btn1.onclick = function(){ goPage('product-products'); };
-  var btn2 = document.createElement('button');
-  btn2.className = 'btn btn-p'; btn2.style.cssText = 'flex:1;padding:10px;font-size:13px';
-  btn2.textContent = '+ New product';
-  btn2.onclick = function(){
-    NP = {name:'',price:'',currency:'EUR',type:'recurring',period:'Monthly',trialDays:0,desc:'',platform:null,pmScope:'account',pmScopeAsked:false};
-    buildNewProductPage();
-  };
-  actions.appendChild(btn1); actions.appendChild(btn2);
-
-  wrap.appendChild(hero); wrap.appendChild(card); wrap.appendChild(actions);
-  pg.appendChild(wrap);
   pg.dataset.built = '1';
-  document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('on'); });
-  pg.classList.add('on');
 }
 
 
@@ -5661,38 +5262,48 @@ function buildPublishConfirm() {
 
 var AFF_PROGRAM = {
   enabled: true,
-  name: 'Suby Affiliates',
-  commissionType: 'percent',  // 'percent' | 'flat'
-  commissionRate: 30,          // 30% recurring
-  commissionDuration: 'lifetime', // 'lifetime' | 'months' | 'first'
+  commissionType: 'percent',
+  commissionRate: 30,
+  commissionDuration: 'lifetime',
   commissionMonths: 12,
   cookieDays: 60,
   minPayout: 50,
   currency: 'USD',
   selfReferral: false,
-  rewardRepeat: true,
 };
 
 var AFFILIATES_DATA = [
-  {id:'aff_01', name:'Marie Dupont',      email:'marie@growth.fr',      code:'MARIE30',     status:'active',   joined:'Jan 12, 2025', clicks:1240, conversions:38, revenue:4820, commission:1446, pending:320,  paid:1126},
-  {id:'aff_02', name:'Tom Reeves',        email:'tom@devco.fr',          code:'TOMR',        status:'active',   joined:'Feb 3, 2025',  clicks:890,  conversions:24, revenue:2960, commission:888,  pending:210,  paid:678},
-  {id:'aff_03', name:'Pedro Alvarez',     email:'pedro@media.es',        code:'PEDRO2025',   status:'active',   joined:'Mar 1, 2025',  clicks:340,  conversions:9,  revenue:1080, commission:324,  pending:90,   paid:234},
-  {id:'aff_04', name:'Anna Schmidt',      email:'anna@brands.de',        code:'ANNA',        status:'pending',  joined:'Mar 18, 2025', clicks:0,    conversions:0,  revenue:0,    commission:0,    pending:0,    paid:0},
-  {id:'aff_05', name:'Lucas Moreau',      email:'lucas@saas.co',         code:'LUCAS10',     status:'active',   joined:'Dec 5, 2024',  clicks:2100, conversions:61, revenue:7930, commission:2379, pending:540,  paid:1839},
-  {id:'aff_06', name:'Priya Mehta',       email:'priya@growth.io',       code:'PRIYA',       status:'active',   joined:'Nov 14, 2024', clicks:680,  conversions:17, revenue:2040, commission:612,  pending:0,    paid:612},
-  {id:'aff_07', name:'David Kim',         email:'david@techco.kr',       code:'DAVID_K',     status:'suspended',joined:'Oct 2, 2024',  clicks:420,  conversions:11, revenue:1320, commission:396,  pending:0,    paid:396},
-  {id:'aff_08', name:'Julie Fontaine',    email:'julie@agence-jf.fr',    code:'JULIE_JF',    status:'active',   joined:'Jan 28, 2025', clicks:560,  conversions:14, revenue:1680, commission:504,  pending:120,  paid:384},
+  {id:'aff_01', name:'Marie Dupont',     email:'marie@growth.fr',         code:'MARIE30',    status:'active',    joined:'Jan 12, 2025', clicks:1240, conversions:38, revenue:4820, commission:1446, pending:320,  paid:1126},
+  {id:'aff_02', name:'Tom Reeves',       email:'tom@devco.fr',            code:'TOMR',        status:'active',    joined:'Feb 3, 2025',  clicks:890,  conversions:24, revenue:2960, commission:888,  pending:210,  paid:678},
+  {id:'aff_03', name:'Pedro Alvarez',    email:'pedro@media.es',          code:'PEDRO2025',   status:'active',    joined:'Mar 1, 2025',  clicks:340,  conversions:9,  revenue:1080, commission:324,  pending:90,   paid:234},
+  {id:'aff_04', name:'Anna Schmidt',     email:'anna@brands.de',          code:'ANNA',        status:'pending',   joined:'Mar 18, 2025', clicks:0,    conversions:0,  revenue:0,    commission:0,    pending:0,    paid:0},
+  {id:'aff_05', name:'Lucas Moreau',     email:'lucas@saas.co',           code:'LUCAS10',     status:'active',    joined:'Dec 5, 2024',  clicks:2100, conversions:61, revenue:7930, commission:2379, pending:540,  paid:1839},
+  {id:'aff_06', name:'Priya Mehta',      email:'priya@growth.io',         code:'PRIYA',       status:'active',    joined:'Nov 14, 2024', clicks:680,  conversions:17, revenue:2040, commission:612,  pending:0,    paid:612},
+  {id:'aff_07', name:'David Kim',        email:'david@techco.kr',         code:'DAVID_K',     status:'suspended', joined:'Oct 2, 2024',  clicks:420,  conversions:11, revenue:1320, commission:396,  pending:0,    paid:396},
+  {id:'aff_08', name:'Julie Fontaine',   email:'julie@agence-jf.fr',      code:'JULIE_JF',    status:'active',    joined:'Jan 28, 2025', clicks:560,  conversions:14, revenue:1680, commission:504,  pending:120,  paid:384},
+  {id:'aff_09', name:'Yuki Tanaka',      email:'yuki@creator.jp',         code:'YUKI_JP',     status:'active',    joined:'Dec 12, 2024', clicks:3400, conversions:94, revenue:11280,commission:3384, pending:780,  paid:2604},
+  {id:'aff_10', name:'Marco Rossi',      email:'marco@techblog.it',       code:'MARCO_IT',    status:'active',    joined:'Nov 8, 2024',  clicks:1150, conversions:29, revenue:3480, commission:1044, pending:180,  paid:864},
+  {id:'aff_11', name:'Amira Benali',     email:'amira@growth.dz',         code:'AMIRA',       status:'pending',   joined:'Mar 22, 2025', clicks:0,    conversions:0,  revenue:0,    commission:0,    pending:0,    paid:0},
+  {id:'aff_12', name:'Rashid Al-Farsi',  email:'rashid@saas.ae',          code:'RASHID30',    status:'active',    joined:'Feb 14, 2025', clicks:720,  conversions:18, revenue:2160, commission:648,  pending:90,   paid:558},
+  {id:'aff_13', name:'Claire Beaumont',  email:'claire@influence.fr',     code:'CLAIRE_B',    status:'suspended', joined:'Sep 3, 2024',  clicks:980,  conversions:22, revenue:2640, commission:792,  pending:0,    paid:792},
+  {id:'aff_14', name:'Theo Müller',      email:'theo@newsletter.de',      code:'THEO_DE',     status:'active',    joined:'Jan 5, 2025',  clicks:2200, conversions:55, revenue:6600, commission:1980, pending:420,  paid:1560},
 ];
 
 var COMMISSIONS_DATA = [
-  {id:'com_01', aff:'Lucas Moreau',  customer:'startup.io',       product:'Pro plan',    amount:49,  commission:14.70, date:'Mar 20, 2025', status:'pending',  type:'recurring'},
-  {id:'com_02', aff:'Marie Dupont',  customer:'alex@design.co',   product:'Pro plan',    amount:49,  commission:14.70, date:'Mar 19, 2025', status:'pending',  type:'recurring'},
-  {id:'com_03', aff:'Tom Reeves',    customer:'corp@team.io',     product:'Team plan',   amount:89,  commission:26.70, date:'Mar 18, 2025', status:'pending',  type:'new'},
-  {id:'com_04', aff:'Lucas Moreau',  customer:'dev@code.fr',      product:'Pro plan',    amount:49,  commission:14.70, date:'Mar 17, 2025', status:'approved', type:'recurring'},
-  {id:'com_05', aff:'Marie Dupont',  customer:'brand@studio.fr',  product:'Team plan',   amount:89,  commission:26.70, date:'Mar 16, 2025', status:'approved', type:'new'},
-  {id:'com_06', aff:'Julie Fontaine',customer:'media@agency.co',  product:'Starter',     amount:19,  commission:5.70,  date:'Mar 15, 2025', status:'paid',     type:'new'},
-  {id:'com_07', aff:'Priya Mehta',   customer:'fintech@io.in',    product:'Pro plan',    amount:49,  commission:14.70, date:'Mar 14, 2025', status:'paid',     type:'recurring'},
-  {id:'com_08', aff:'Lucas Moreau',  customer:'ai@tools.xyz',     product:'Team plan',   amount:89,  commission:26.70, date:'Mar 13, 2025', status:'paid',     type:'new'},
+  {id:'com_01', aff:'Lucas Moreau',     customer:'startup.io',        product:'Pro plan',    amount:49,  commission:14.70, date:'Mar 20, 2025', status:'pending',  type:'recurring'},
+  {id:'com_02', aff:'Marie Dupont',     customer:'alex@design.co',    product:'Pro plan',    amount:49,  commission:14.70, date:'Mar 19, 2025', status:'pending',  type:'recurring'},
+  {id:'com_03', aff:'Tom Reeves',       customer:'corp@team.io',      product:'Team plan',   amount:89,  commission:26.70, date:'Mar 18, 2025', status:'pending',  type:'new'},
+  {id:'com_04', aff:'Lucas Moreau',     customer:'dev@code.fr',       product:'Pro plan',    amount:49,  commission:14.70, date:'Mar 17, 2025', status:'approved', type:'recurring'},
+  {id:'com_05', aff:'Marie Dupont',     customer:'brand@studio.fr',   product:'Team plan',   amount:89,  commission:26.70, date:'Mar 16, 2025', status:'approved', type:'new'},
+  {id:'com_06', aff:'Julie Fontaine',   customer:'media@agency.co',   product:'Starter',     amount:19,  commission:5.70,  date:'Mar 15, 2025', status:'paid',     type:'new'},
+  {id:'com_07', aff:'Priya Mehta',      customer:'fintech@io.in',     product:'Pro plan',    amount:49,  commission:14.70, date:'Mar 14, 2025', status:'paid',     type:'recurring'},
+  {id:'com_08', aff:'Lucas Moreau',     customer:'ai@tools.xyz',      product:'Team plan',   amount:89,  commission:26.70, date:'Mar 13, 2025', status:'paid',     type:'new'},
+  {id:'com_09', aff:'Yuki Tanaka',      customer:'dev@studio.jp',     product:'Pro plan',    amount:49,  commission:14.70, date:'Mar 12, 2025', status:'paid',     type:'recurring'},
+  {id:'com_10', aff:'Theo Müller',      customer:'startup@hub.de',    product:'Team plan',   amount:89,  commission:26.70, date:'Mar 12, 2025', status:'approved', type:'new'},
+  {id:'com_11', aff:'Marie Dupont',     customer:'ceo@scale.fr',      product:'Growth plan', amount:149, commission:44.70, date:'Mar 11, 2025', status:'pending',  type:'new'},
+  {id:'com_12', aff:'Yuki Tanaka',      customer:'pm@product.io',     product:'Pro plan',    amount:49,  commission:14.70, date:'Mar 11, 2025', status:'pending',  type:'recurring'},
+  {id:'com_13', aff:'Marco Rossi',      customer:'cto@build.it',      product:'Team plan',   amount:89,  commission:26.70, date:'Mar 10, 2025', status:'paid',     type:'new'},
+  {id:'com_14', aff:'Rashid Al-Farsi',  customer:'biz@dubai.ae',      product:'Starter',     amount:19,  commission:5.70,  date:'Mar 10, 2025', status:'approved', type:'recurring'},
 ];
 
 var AFF_TAB = 'all';
@@ -5725,26 +5336,22 @@ function setComPage(p)   { var max=Math.ceil(getComFiltered().length/8); COM_PAG
 function getAffFiltered() {
   var q = AFF_SEARCH.toLowerCase();
   return AFFILIATES_DATA.filter(function(a) {
-    var mTab = AFF_TAB==='all' || a.status===AFF_TAB;
+    var mT = AFF_TAB==='all' || a.status===AFF_TAB;
     var mQ = !q || a.name.toLowerCase().includes(q) || a.email.toLowerCase().includes(q) || a.code.toLowerCase().includes(q);
-    return mTab && mQ;
+    return mT && mQ;
   });
 }
-
 function getComFiltered() {
-  return COMMISSIONS_DATA.filter(function(c) {
-    return COM_TAB==='all' || c.status===COM_TAB;
-  });
+  return COMMISSIONS_DATA.filter(function(c) { return COM_TAB==='all' || c.status===COM_TAB; });
 }
 
 function rebuildAffPage() {
   var pg = document.getElementById('p-affiliate-affiliates');
-  if (pg) pg.innerHTML = '<div class="ph" style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:10px"><div><h2>Affiliates</h2><p>Manage your affiliate partners.</p></div><button class="btn btn-p btn-sm" onclick="showInviteAffModal()">+ Invite affiliate</button></div>' + buildAffiliatesContent();
+  if (pg) { pg.innerHTML = '<div class="ph" style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:10px"><div><h2>Affiliates</h2><p>Manage your affiliate partners.</p></div><button class="btn btn-p btn-sm" onclick="showInviteAffModal()">+ Invite affiliate</button></div>' + buildAffiliatesContent(); }
 }
-
 function rebuildComPage() {
   var pg = document.getElementById('p-affiliate-commissions');
-  if (pg) pg.innerHTML = '<div class="ph"><h2>Commissions</h2><p>Review, approve and pay commissions.</p></div>' + buildCommissionsContent();
+  if (pg) { pg.innerHTML = '<div class="ph"><h2>Commissions</h2><p>Review, approve and pay commissions.</p></div>' + buildCommissionsContent(); }
 }
 
 function showInviteAffModal() {
@@ -5754,116 +5361,65 @@ function showInviteAffModal() {
   overlay.id = 'invite-aff-modal';
   overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.45);backdrop-filter:blur(4px);z-index:400;display:flex;align-items:center;justify-content:center;padding:1rem;animation:fi .15s ease';
   overlay.onclick = function(e){ if(e.target===overlay) overlay.remove(); };
-
   var box = document.createElement('div');
   box.style.cssText = 'background:var(--bg);border-radius:16px;width:100%;max-width:440px;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,.18)';
-
   var hdr = document.createElement('div');
   hdr.style.cssText = 'padding:1.25rem 1.5rem;border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between';
   hdr.innerHTML = '<div><div style="font-size:15px;font-weight:700;letter-spacing:-.02em">Invite an affiliate</div><div style="font-size:11px;color:var(--tx3);margin-top:1px">They\'ll receive an email with their tracking link</div></div>';
-  var cls = document.createElement('button');
-  cls.innerHTML = '&times;'; cls.style.cssText = 'background:none;border:none;cursor:pointer;font-size:20px;color:var(--tx3);line-height:1;padding:4px 6px';
-  cls.onclick = function(){ overlay.remove(); };
-  hdr.appendChild(cls);
-
-  var body = document.createElement('div');
-  body.style.cssText = 'padding:1.25rem 1.5rem;display:flex;flex-direction:column;gap:.875rem';
-
-  [['Name','text','e.g. Marie Dupont'],['Email address','email','affiliate@example.com'],['Custom code (optional)','text','e.g. MARIE30 — auto-generated if empty']].forEach(function(f,i) {
-    var wrap = document.createElement('div');
-    var lbl = document.createElement('label');
-    lbl.style.cssText = 'display:block;font-size:11px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px';
-    lbl.textContent = f[0];
-    var inp = document.createElement('input');
-    inp.type = f[1]; inp.placeholder = f[2];
-    inp.style.cssText = 'width:100%;font-family:var(--f);font-size:13px;padding:9px 12px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--tx);outline:none';
-    inp.onfocus = function(){ this.style.borderColor='var(--tx)'; };
-    inp.onblur  = function(){ this.style.borderColor='var(--bd)'; };
-    wrap.appendChild(lbl); wrap.appendChild(inp);
-    body.appendChild(wrap);
+  var cls = document.createElement('button'); cls.innerHTML='&times;'; cls.style.cssText='background:none;border:none;cursor:pointer;font-size:20px;color:var(--tx3);line-height:1;padding:4px 6px'; cls.onclick=function(){ overlay.remove(); }; hdr.appendChild(cls);
+  var body = document.createElement('div'); body.style.cssText='padding:1.25rem 1.5rem;display:flex;flex-direction:column;gap:.875rem';
+  [['Name','text','e.g. Marie Dupont'],['Email address','email','affiliate@example.com'],['Custom code (optional)','text','e.g. MARIE30']].forEach(function(f) {
+    var w=document.createElement('div'); var l=document.createElement('label'); l.style.cssText='display:block;font-size:11px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px'; l.textContent=f[0];
+    var i=document.createElement('input'); i.type=f[1]; i.placeholder=f[2]; i.style.cssText='width:100%;font-family:var(--f);font-size:13px;padding:9px 12px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--tx);outline:none';
+    i.onfocus=function(){this.style.borderColor='var(--tx)';}; i.onblur=function(){this.style.borderColor='var(--bd)';}; w.appendChild(l); w.appendChild(i); body.appendChild(w);
   });
-
-  var ftr = document.createElement('div');
-  ftr.style.cssText = 'padding:1rem 1.5rem;border-top:1px solid var(--bd);display:flex;justify-content:space-between;background:var(--bg2)';
-  var btnC = document.createElement('button'); btnC.className='btn'; btnC.textContent='Cancel'; btnC.onclick=function(){ overlay.remove(); };
-  var btnS = document.createElement('button'); btnS.className='btn btn-p'; btnS.textContent='Send invite';
-  btnS.onclick = function(){ showToast('add','Invite sent!'); overlay.remove(); };
-  ftr.appendChild(btnC); ftr.appendChild(btnS);
-
-  box.appendChild(hdr); box.appendChild(body); box.appendChild(ftr);
-  overlay.appendChild(box);
-  document.body.appendChild(overlay);
+  var ftr=document.createElement('div'); ftr.style.cssText='padding:1rem 1.5rem;border-top:1px solid var(--bd);display:flex;justify-content:space-between;background:var(--bg2)';
+  var bc=document.createElement('button'); bc.className='btn'; bc.textContent='Cancel'; bc.onclick=function(){overlay.remove();};
+  var bs=document.createElement('button'); bs.className='btn btn-p'; bs.textContent='Send invite'; bs.onclick=function(){showToast('add','Invite sent!'); overlay.remove();};
+  ftr.appendChild(bc); ftr.appendChild(bs); box.appendChild(hdr); box.appendChild(body); box.appendChild(ftr); overlay.appendChild(box); document.body.appendChild(overlay);
 }
+
+function affSetupChange(key, val) { AFF_PROGRAM[key] = val; buildAffSetupPage(); }
 
 function buildAffiliateOverview() {
   var active = AFFILIATES_DATA.filter(function(a){return a.status==='active';}).length;
   var totalRev = AFFILIATES_DATA.reduce(function(s,a){return s+a.revenue;},0);
-  var totalCom = AFFILIATES_DATA.reduce(function(s,a){return s+a.commission;},0);
   var totalPending = AFFILIATES_DATA.reduce(function(s,a){return s+a.pending;},0);
-  var convRate = (AFFILIATES_DATA.reduce(function(s,a){return s+a.conversions;},0) /
-                  Math.max(1,AFFILIATES_DATA.reduce(function(s,a){return s+a.clicks;},0)) * 100).toFixed(1);
-
-  var topAffs = AFFILIATES_DATA.slice().sort(function(a,b){return b.revenue-a.revenue;}).slice(0,3);
-  var recentComs = COMMISSIONS_DATA.slice(0,5);
-
+  var convRate = (AFFILIATES_DATA.reduce(function(s,a){return s+a.conversions;},0) / Math.max(1,AFFILIATES_DATA.reduce(function(s,a){return s+a.clicks;},0))*100).toFixed(1);
+  var topAffs = AFFILIATES_DATA.slice().sort(function(a,b){return b.revenue-a.revenue;}).slice(0,5);
+  var recentComs = COMMISSIONS_DATA.slice(0,6);
   var thS = 'font-size:11px;font-weight:600;color:var(--tx3);padding:8px 14px;text-align:left;border-bottom:1px solid var(--bd);background:var(--bg2);white-space:nowrap';
-
   return '<div class="g4" style="margin-bottom:1.25rem">' +
-    mkKpi('Affiliate revenue','$' + totalRev.toLocaleString(),'dlu','+22% vs last month','') +
-    mkKpi('Active affiliates',String(active),'dlu',AFFILIATES_DATA.length + ' total','') +
-    mkKpi('Pending commissions','$' + totalPending.toLocaleString(),'dln','awaiting payout','') +
-    mkKpi('Click → conversion',convRate + '%','dlu','avg across all affiliates','') +
+    mkKpi('Affiliate revenue','$'+totalRev.toLocaleString(),'dlu','+22% vs last month','') +
+    mkKpi('Active affiliates',String(active),'dlu',AFFILIATES_DATA.length+' total','') +
+    mkKpi('Pending commissions','$'+totalPending.toLocaleString(),'dln','awaiting payout','') +
+    mkKpi('Click conversion',convRate+'%','dlu','avg across affiliates','') +
   '</div>' +
-
-  // Top affiliates
   '<div class="g2" style="margin-bottom:1.25rem">' +
-
-    '<div class="card">' +
-      '<div class="ch"><span class="ct">Top affiliates</span><button class="btn btn-sm" onclick="goPage(\'affiliate-affiliates\')">View all</button></div>' +
-      '<table style="width:100%;border-collapse:collapse">' +
-        '<thead><tr>' +
-          ['Affiliate','Revenue','Commission','Conv.'].map(function(h){return '<th style="'+thS+'">'+h+'</th>';}).join('') +
-        '</tr></thead><tbody>' +
-        topAffs.map(function(a,i) {
-          return '<tr style="'+(i%2===0?'':'background:var(--bg2)')+'" onmouseover="connRowHover(this,1)" onmouseout="connRowHover(this,0)">' +
-            '<td style="padding:10px 14px"><div style="font-size:12.5px;font-weight:600">' + a.name + '</div><div style="font-family:var(--m);font-size:10.5px;color:var(--bl)">' + a.code + '</div></td>' +
-            '<td style="padding:10px 14px;font-family:var(--m);font-size:12px;font-weight:600">$' + a.revenue.toLocaleString() + '</td>' +
-            '<td style="padding:10px 14px;font-family:var(--m);font-size:12px;color:var(--g)">$' + a.commission.toLocaleString() + '</td>' +
-            '<td style="padding:10px 14px;font-size:12px;color:var(--tx3)">' + a.conversions + '</td>' +
-          '</tr>';
-        }).join('') +
-      '</tbody></table>' +
-    '</div>' +
-
-    '<div class="card">' +
-      '<div class="ch"><span class="ct">Recent commissions</span><button class="btn btn-sm" onclick="goPage(\'affiliate-commissions\')">View all</button></div>' +
-      '<div style="display:flex;flex-direction:column">' +
-        recentComs.map(function(c) {
-          return '<div style="display:flex;align-items:center;gap:12px;padding:10px 14px;border-bottom:1px solid var(--bg3)">' +
-            '<div style="flex:1;min-width:0"><div style="font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + c.aff + '</div><div style="font-size:11px;color:var(--tx3)">' + c.product + '</div></div>' +
-            '<div style="font-family:var(--m);font-size:12px;font-weight:600;color:var(--g)">+$' + c.commission.toFixed(2) + '</div>' +
-            affStatusBadge(c.status) +
-          '</div>';
-        }).join('') +
-      '</div>' +
-    '</div>' +
-
+    '<div class="card"><div class="ch"><span class="ct">Top affiliates</span><button class="btn btn-sm" onclick="goPage(\'affiliate-affiliates\')">View all</button></div>' +
+    '<table style="width:100%;border-collapse:collapse"><thead><tr>'+['Affiliate','Revenue','Commission','Conv.'].map(function(h){return '<th style="'+thS+'">'+h+'</th>';}).join('')+'</tr></thead><tbody>' +
+    topAffs.map(function(a,i){
+      return '<tr style="'+(i%2?'background:var(--bg2)':'')+'" onmouseover="connRowHover(this,1)" onmouseout="connRowHover(this,0)">'+
+        '<td style="padding:10px 14px"><div style="font-size:12.5px;font-weight:600">'+a.name+'</div><div style="font-family:var(--m);font-size:10.5px;color:var(--bl)">'+a.code+'</div></td>'+
+        '<td style="padding:10px 14px;font-family:var(--m);font-size:12px;font-weight:600">$'+a.revenue.toLocaleString()+'</td>'+
+        '<td style="padding:10px 14px;font-family:var(--m);font-size:12px;color:var(--g)">$'+a.commission.toLocaleString()+'</td>'+
+        '<td style="padding:10px 14px;font-size:12px;color:var(--tx3)">'+a.conversions+'</td></tr>';
+    }).join('') +
+    '</tbody></table></div>' +
+    '<div class="card"><div class="ch"><span class="ct">Recent commissions</span><button class="btn btn-sm" onclick="goPage(\'affiliate-commissions\')">View all</button></div>' +
+    '<div style="display:flex;flex-direction:column">' +
+    recentComs.map(function(c){
+      return '<div style="display:flex;align-items:center;gap:12px;padding:10px 14px;border-bottom:1px solid var(--bg3)">'+
+        '<div style="flex:1;min-width:0"><div style="font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+c.aff+'</div><div style="font-size:11px;color:var(--tx3)">'+c.product+'</div></div>'+
+        '<div style="font-family:var(--m);font-size:12px;font-weight:600;color:var(--g)">+$'+c.commission.toFixed(2)+'</div>'+affStatusBadge(c.status)+'</div>';
+    }).join('')+'</div></div>' +
   '</div>' +
-
-  // Program summary card
-  '<div class="card">' +
-    '<div class="ch"><span class="ct">Program</span><button class="btn btn-sm" onclick="goPage(\'affiliate-setup\')">Configure</button></div>' +
-    '<div class="cb" style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem">' +
-      [
-        ['Commission', AFF_PROGRAM.commissionRate + '% recurring'],
-        ['Cookie window', AFF_PROGRAM.cookieDays + ' days'],
-        ['Min. payout', '$' + AFF_PROGRAM.minPayout],
-        ['Duration', AFF_PROGRAM.commissionDuration === 'lifetime' ? 'Lifetime' : AFF_PROGRAM.commissionMonths + ' months'],
-      ].map(function(r) {
-        return '<div><div style="font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--tx3);margin-bottom:4px">' + r[0] + '</div><div style="font-size:13.5px;font-weight:700;letter-spacing:-.02em">' + r[1] + '</div></div>';
-      }).join('') +
-    '</div>' +
-  '</div>';
+  '<div class="card"><div class="ch"><span class="ct">Program</span><button class="btn btn-sm" onclick="goPage(\'affiliate-setup\')">Configure</button></div>' +
+  '<div class="cb" style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem">' +
+    [['Commission',AFF_PROGRAM.commissionRate+'% recurring'],['Cookie window',AFF_PROGRAM.cookieDays+' days'],['Min. payout','$'+AFF_PROGRAM.minPayout],['Duration',AFF_PROGRAM.commissionDuration==='lifetime'?'Lifetime':AFF_PROGRAM.commissionMonths+' months']].map(function(r){
+      return '<div><div style="font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--tx3);margin-bottom:4px">'+r[0]+'</div><div style="font-size:13.5px;font-weight:700;letter-spacing:-.02em">'+r[1]+'</div></div>';
+    }).join('')+
+  '</div></div>';
 }
 
 function buildAffiliatesContent() {
@@ -5871,56 +5427,49 @@ function buildAffiliatesContent() {
   var total = filtered.length;
   var totalP = Math.max(1,Math.ceil(total/AFF_ROWS));
   var paged = filtered.slice((AFF_PAGE-1)*AFF_ROWS, AFF_PAGE*AFF_ROWS);
-  var counts = {all:AFFILIATES_DATA.length, active:0, pending:0, suspended:0};
-  AFFILIATES_DATA.forEach(function(a){ if(counts[a.status]!==undefined) counts[a.status]++; });
-
+  var counts = {all:AFFILIATES_DATA.length,active:0,pending:0,suspended:0};
+  AFFILIATES_DATA.forEach(function(a){if(counts[a.status]!==undefined)counts[a.status]++;});
   var thS = 'font-size:11px;font-weight:600;color:var(--tx3);padding:9px 14px;text-align:left;border-bottom:1px solid var(--bd);background:var(--bg2);white-space:nowrap';
-  var tabBtns = ['all','active','pending','suspended'].map(function(t) {
-    var on = AFF_TAB===t;
-    return '<button onclick="setAffTab(\''+t+'\')" style="padding:5px 12px;font-size:11.5px;font-weight:'+(on?'600':'400')+';font-family:var(--f);border:none;border-radius:var(--r);background:'+(on?'var(--tx)':'transparent')+';color:'+(on?'var(--bg)':'var(--tx2)')+';cursor:pointer;transition:all .12s">' +
-      t.charAt(0).toUpperCase()+t.slice(1) + (t!=='all'?' ('+counts[t]+')':'') +
-    '</button>';
+  var tabs = ['all','active','pending','suspended'].map(function(t){
+    var on=AFF_TAB===t;
+    return '<button onclick="setAffTab(\''+t+'\')" style="padding:5px 12px;font-size:11.5px;font-weight:'+(on?'600':'400')+';font-family:var(--f);border:none;border-radius:var(--r);background:'+(on?'var(--tx)':'transparent')+';color:'+(on?'var(--bg)':'var(--tx2)')+';cursor:pointer;transition:all .12s">'+t.charAt(0).toUpperCase()+t.slice(1)+(t!=='all'?' ('+counts[t]+')':'')+'</button>';
   }).join('');
-
-  var bs = function(d){ return 'background:var(--bg);border:1px solid var(--bd);border-radius:var(--r);padding:5px 8px;font-size:13px;color:'+(d?'var(--tx3)':'var(--tx)')+';cursor:'+(d?'default':'pointer')+';opacity:'+(d?'.35':'1'); };
-
-  var rows = paged.map(function(a,i) {
-    return '<tr style="'+(i%2===0?'':'background:var(--bg2)')+'" onmouseover="connRowHover(this,1)" onmouseout="connRowHover(this,0)">' +
-      '<td style="padding:10px 14px"><div style="font-size:12.5px;font-weight:600">' + a.name + '</div><div style="font-size:11px;color:var(--tx3)">' + a.email + '</div></td>' +
-      '<td style="padding:10px 14px"><span style="font-family:var(--m);font-size:11.5px;font-weight:600;background:var(--bg2);border:1px solid var(--bd);padding:2px 8px;border-radius:4px">' + a.code + '</span></td>' +
-      '<td style="padding:10px 14px;font-size:12px;color:var(--tx3)">' + a.joined + '</td>' +
-      '<td style="padding:10px 14px;font-size:12px;color:var(--tx2);text-align:right">' + a.clicks.toLocaleString() + '</td>' +
-      '<td style="padding:10px 14px;font-size:12px;color:var(--tx2);text-align:right">' + a.conversions + '</td>' +
-      '<td style="padding:10px 14px;font-family:var(--m);font-size:12.5px;font-weight:600;text-align:right">$' + a.revenue.toLocaleString() + '</td>' +
-      '<td style="padding:10px 14px;font-family:var(--m);font-size:12px;color:var(--g);text-align:right">$' + a.commission.toLocaleString() + '</td>' +
-      '<td style="padding:10px 14px">' + affStatusBadge(a.status) + '</td>' +
-      '<td style="padding:10px 14px;white-space:nowrap">' +
-        '<button onclick="showToast(\'add\',\'Link copied\')" style="background:none;border:none;cursor:pointer;color:var(--tx3);padding:4px;border-radius:4px;display:inline-flex;align-items:center" onmouseover="this.style.background=\'var(--bg3)\'" onmouseout="this.style.background=\'none\'"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M4 9l5-5M8 4h3v3M5 9H2V6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>' +
-      '</td>' +
+  var bs=function(d){return 'background:var(--bg);border:1px solid var(--bd);border-radius:var(--r);padding:5px 8px;font-size:13px;color:'+(d?'var(--tx3)':'var(--tx)')+';cursor:'+(d?'default':'pointer')+';opacity:'+(d?'.35':'1');};
+  var rows = paged.map(function(a,i){
+    return '<tr style="'+(i%2?'background:var(--bg2)':'')+'" onmouseover="connRowHover(this,1)" onmouseout="connRowHover(this,0)">'+
+      '<td style="padding:10px 14px"><div style="font-size:12.5px;font-weight:600">'+a.name+'</div><div style="font-size:11px;color:var(--tx3)">'+a.email+'</div></td>'+
+      '<td style="padding:10px 14px"><span style="font-family:var(--m);font-size:11.5px;font-weight:600;background:var(--bg2);border:1px solid var(--bd);padding:2px 8px;border-radius:4px">'+a.code+'</span></td>'+
+      '<td style="padding:10px 14px;font-size:12px;color:var(--tx3)">'+a.joined+'</td>'+
+      '<td style="padding:10px 14px;font-size:12px;color:var(--tx2);text-align:right">'+a.clicks.toLocaleString()+'</td>'+
+      '<td style="padding:10px 14px;font-size:12px;color:var(--tx2);text-align:right">'+a.conversions+'</td>'+
+      '<td style="padding:10px 14px;font-family:var(--m);font-size:12.5px;font-weight:600;text-align:right">$'+a.revenue.toLocaleString()+'</td>'+
+      '<td style="padding:10px 14px;font-family:var(--m);font-size:12px;color:var(--g);text-align:right">$'+a.commission.toLocaleString()+'</td>'+
+      '<td style="padding:10px 14px">'+affStatusBadge(a.status)+'</td>'+
+      '<td style="padding:10px 14px"><button onclick="showToast(\'add\',\'Link copied\')" style="background:none;border:none;cursor:pointer;color:var(--tx3);padding:4px;border-radius:4px;display:inline-flex;align-items:center" onmouseover="this.style.background=\'var(--bg3)\'" onmouseout="this.style.background=\'none\'"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M4 9l5-5M8 4h3v3M5 9H2V6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td>'+
     '</tr>';
   }).join('');
-
-  return '<div class="card">' +
-    '<div class="ch" style="flex-wrap:wrap;gap:8px">' +
-      '<div style="display:flex;gap:4px;background:var(--bg3);padding:3px;border-radius:var(--r2)">' + tabBtns + '</div>' +
-      '<div style="display:flex;gap:8px;align-items:center;margin-left:auto">' +
-        '<div style="position:relative"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="position:absolute;left:9px;top:50%;transform:translateY(-50%);opacity:.4;pointer-events:none"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input type="text" placeholder="Search affiliates\u2026" value="' + AFF_SEARCH + '" oninput="setAffSearch(this.value)" style="font-family:var(--f);font-size:12px;padding:6px 10px 6px 28px;border:1px solid var(--bd);border-radius:var(--r);background:var(--bg);color:var(--tx);outline:none;width:220px" onfocus="this.style.borderColor=\'var(--tx)\'" onblur="this.style.borderColor=\'var(--bd)\'"></div>' +
-      '</div>' +
-    '</div>' +
-    '<div style="overflow-x:auto"><table style="width:100%;min-width:800px;border-collapse:collapse">' +
-      '<thead><tr>' + ['Affiliate','Code','Joined','Clicks','Conv.','Revenue','Commission','Status',''].map(function(h,i){ return '<th style="'+thS+(i>3?';text-align:right':'')+(i===8?';width:40px':'')+'">'+h+'</th>'; }).join('') + '</tr></thead>' +
-      '<tbody>' + rows + '</tbody>' +
-    '</table></div>' +
-    '<div style="padding:.65rem 1.25rem;border-top:1px solid var(--bd);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">' +
-      '<span style="font-size:11px;color:var(--tx3)">' + paged.length + ' of ' + total + ' affiliates</span>' +
-      '<div style="display:flex;align-items:center;gap:6px">' +
-        '<button onclick="setAffPage(1)" '+(AFF_PAGE===1?'disabled':'')+' style="'+bs(AFF_PAGE===1)+'">&#171;</button>' +
-        '<button onclick="setAffPage('+(AFF_PAGE-1)+')" '+(AFF_PAGE===1?'disabled':'')+' style="'+bs(AFF_PAGE===1)+'">&#8249;</button>' +
-        '<button onclick="setAffPage('+(AFF_PAGE+1)+')" '+(AFF_PAGE>=totalP?'disabled':'')+' style="'+bs(AFF_PAGE>=totalP)+'">&#8250;</button>' +
-        '<button onclick="setAffPage('+totalP+')" '+(AFF_PAGE>=totalP?'disabled':'')+' style="'+bs(AFF_PAGE>=totalP)+'">&#187;</button>' +
-        '<span style="font-size:11px;color:var(--tx3)">Page '+AFF_PAGE+' of '+totalP+'</span>' +
-      '</div>' +
-    '</div>' +
+  return '<div class="card">'+
+    '<div class="ch" style="flex-wrap:wrap;gap:8px">'+
+      '<div style="display:flex;gap:4px;background:var(--bg3);padding:3px;border-radius:var(--r2)">'+tabs+'</div>'+
+      '<div style="display:flex;gap:8px;align-items:center;margin-left:auto">'+
+        '<div style="position:relative"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="position:absolute;left:9px;top:50%;transform:translateY(-50%);opacity:.4;pointer-events:none"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>'+
+        '<input type="text" placeholder="Search affiliates\u2026" value="'+AFF_SEARCH+'" oninput="setAffSearch(this.value)" style="font-family:var(--f);font-size:12px;padding:6px 10px 6px 28px;border:1px solid var(--bd);border-radius:var(--r);background:var(--bg);color:var(--tx);outline:none;width:220px" onfocus="this.style.borderColor=\'var(--tx)\'" onblur="this.style.borderColor=\'var(--bd)\'"></div>'+
+      '</div>'+
+    '</div>'+
+    '<div style="overflow-x:auto"><table style="width:100%;min-width:800px;border-collapse:collapse">'+
+      '<thead><tr>'+['Affiliate','Code','Joined','Clicks','Conv.','Revenue','Commission','Status',''].map(function(h,i){return '<th style="'+thS+(i>=3&&i<=6?';text-align:right':'')+'">'+h+'</th>';}).join('')+'</tr></thead>'+
+      '<tbody>'+rows+'</tbody>'+
+    '</table></div>'+
+    '<div style="padding:.65rem 1.25rem;border-top:1px solid var(--bd);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">'+
+      '<span style="font-size:11px;color:var(--tx3)">'+paged.length+' of '+total+' affiliates</span>'+
+      '<div style="display:flex;align-items:center;gap:6px">'+
+        '<button onclick="setAffPage(1)" '+(AFF_PAGE===1?'disabled':'')+' style="'+bs(AFF_PAGE===1)+'">&#171;</button>'+
+        '<button onclick="setAffPage('+(AFF_PAGE-1)+')" '+(AFF_PAGE===1?'disabled':'')+' style="'+bs(AFF_PAGE===1)+'">&#8249;</button>'+
+        '<button onclick="setAffPage('+(AFF_PAGE+1)+')" '+(AFF_PAGE>=totalP?'disabled':'')+' style="'+bs(AFF_PAGE>=totalP)+'">&#8250;</button>'+
+        '<button onclick="setAffPage('+totalP+')" '+(AFF_PAGE>=totalP?'disabled':'')+' style="'+bs(AFF_PAGE>=totalP)+'">&#187;</button>'+
+        '<span style="font-size:11px;color:var(--tx3)">Page '+AFF_PAGE+' of '+totalP+'</span>'+
+      '</div>'+
+    '</div>'+
   '</div>';
 }
 
@@ -5929,157 +5478,90 @@ function buildCommissionsContent() {
   var totalP = Math.max(1,Math.ceil(filtered.length/8));
   var paged = filtered.slice((COM_PAGE-1)*8, COM_PAGE*8);
   var counts = {all:COMMISSIONS_DATA.length,pending:0,approved:0,paid:0};
-  COMMISSIONS_DATA.forEach(function(c){ if(counts[c.status]!==undefined) counts[c.status]++; });
+  COMMISSIONS_DATA.forEach(function(c){if(counts[c.status]!==undefined)counts[c.status]++;});
   var pendingTotal = COMMISSIONS_DATA.filter(function(c){return c.status==='pending'||c.status==='approved';}).reduce(function(s,c){return s+c.commission;},0);
-
-  var thS = 'font-size:11px;font-weight:600;color:var(--tx3);padding:9px 14px;text-align:left;border-bottom:1px solid var(--bd);background:var(--bg2)';
-  var tabBtns = ['all','pending','approved','paid'].map(function(t) {
-    var on = COM_TAB===t;
-    return '<button onclick="setComTab(\''+t+'\')" style="padding:5px 12px;font-size:11.5px;font-weight:'+(on?'600':'400')+';font-family:var(--f);border:none;border-radius:var(--r);background:'+(on?'var(--tx)':'transparent')+';color:'+(on?'var(--bg)':'var(--tx2)')+';cursor:pointer;transition:all .12s">' +
-      t.charAt(0).toUpperCase()+t.slice(1) + (t!=='all'?' ('+counts[t]+')':'') +
-    '</button>';
-  }).join('');
-  var bs = function(d){ return 'background:var(--bg);border:1px solid var(--bd);border-radius:var(--r);padding:5px 8px;font-size:13px;color:'+(d?'var(--tx3)':'var(--tx)')+';cursor:'+(d?'default':'pointer')+';opacity:'+(d?'.35':'1'); };
-
-  var rows = paged.map(function(c,i) {
-    return '<tr style="'+(i%2===0?'':'background:var(--bg2)')+'" onmouseover="connRowHover(this,1)" onmouseout="connRowHover(this,0)">' +
-      '<td style="padding:10px 14px;font-family:var(--m);font-size:11px;color:var(--tx3)">' + c.id + '</td>' +
-      '<td style="padding:10px 14px;font-size:12.5px;font-weight:600">' + c.aff + '</td>' +
-      '<td style="padding:10px 14px"><div style="font-size:12px">' + c.customer + '</div><div style="font-size:11px;color:var(--tx3)">' + c.product + '</div></td>' +
-      '<td style="padding:10px 14px;font-size:12px;color:var(--tx3)">' + c.date + '</td>' +
-      '<td style="padding:10px 14px;font-size:12px;color:var(--tx2)">' + affStatusBadge(c.type) + '</td>' +
-      '<td style="padding:10px 14px;font-family:var(--m);font-size:12px;text-align:right">$' + c.amount.toFixed(2) + '</td>' +
-      '<td style="padding:10px 14px;font-family:var(--m);font-size:12.5px;font-weight:600;color:var(--g);text-align:right">$' + c.commission.toFixed(2) + '</td>' +
-      '<td style="padding:10px 14px">' + affStatusBadge(c.status) + '</td>' +
-      '<td style="padding:10px 14px;white-space:nowrap">' +
-        (c.status==='pending'
-          ? '<button onclick="showToast(\'add\',\'Commission approved\')" class="btn btn-sm">Approve</button>'
-          : c.status==='approved'
-            ? '<button onclick="showToast(\'add\',\'Commission paid\')" class="btn btn-p btn-sm">Pay</button>'
-            : '') +
-      '</td>' +
+  var thS='font-size:11px;font-weight:600;color:var(--tx3);padding:9px 14px;text-align:left;border-bottom:1px solid var(--bd);background:var(--bg2)';
+  var tabs=['all','pending','approved','paid'].map(function(t){var on=COM_TAB===t; return '<button onclick="setComTab(\''+t+'\')" style="padding:5px 12px;font-size:11.5px;font-weight:'+(on?'600':'400')+';font-family:var(--f);border:none;border-radius:var(--r);background:'+(on?'var(--tx)':'transparent')+';color:'+(on?'var(--bg)':'var(--tx2)')+';cursor:pointer;transition:all .12s">'+t.charAt(0).toUpperCase()+t.slice(1)+(t!=='all'?' ('+counts[t]+')':'')+'</button>';}).join('');
+  var bs=function(d){return 'background:var(--bg);border:1px solid var(--bd);border-radius:var(--r);padding:5px 8px;font-size:13px;color:'+(d?'var(--tx3)':'var(--tx)')+';cursor:'+(d?'default':'pointer')+';opacity:'+(d?'.35':'1');};
+  var rows=paged.map(function(c,i){
+    return '<tr style="'+(i%2?'background:var(--bg2)':'')+'" onmouseover="connRowHover(this,1)" onmouseout="connRowHover(this,0)">'+
+      '<td style="padding:10px 14px;font-family:var(--m);font-size:11px;color:var(--tx3)">'+c.id+'</td>'+
+      '<td style="padding:10px 14px;font-size:12.5px;font-weight:600">'+c.aff+'</td>'+
+      '<td style="padding:10px 14px"><div style="font-size:12px">'+c.customer+'</div><div style="font-size:11px;color:var(--tx3)">'+c.product+'</div></td>'+
+      '<td style="padding:10px 14px;font-size:12px;color:var(--tx3)">'+c.date+'</td>'+
+      '<td style="padding:10px 14px">'+affStatusBadge(c.type)+'</td>'+
+      '<td style="padding:10px 14px;font-family:var(--m);font-size:12px;text-align:right">$'+c.amount.toFixed(2)+'</td>'+
+      '<td style="padding:10px 14px;font-family:var(--m);font-size:12.5px;font-weight:600;color:var(--g);text-align:right">$'+c.commission.toFixed(2)+'</td>'+
+      '<td style="padding:10px 14px">'+affStatusBadge(c.status)+'</td>'+
+      '<td style="padding:10px 14px;white-space:nowrap">'+(c.status==='pending'?'<button onclick="showToast(\'add\',\'Approved\')" class="btn btn-sm">Approve</button>':c.status==='approved'?'<button onclick="showToast(\'add\',\'Paid\')" class="btn btn-p btn-sm">Pay</button>':'')+'</td>'+
     '</tr>';
   }).join('');
-
-  return '<div style="padding:.875rem 1.125rem;background:var(--ol);border:1px solid var(--ob);border-radius:var(--r2);margin-bottom:1.25rem;display:flex;align-items:center;justify-content:space-between;gap:12px">' +
-    '<div><div style="font-size:13px;font-weight:600;color:var(--or)">$' + pendingTotal.toFixed(2) + ' in unpaid commissions</div><div style="font-size:11.5px;color:var(--or);margin-top:2px">' + counts.pending + ' pending approval · ' + counts.approved + ' approved and ready to pay</div></div>' +
-    '<button class="btn btn-sm" onclick="showToast(\'add\',\'Bulk payout initiated\')" style="flex-shrink:0;font-weight:600;color:var(--or);border-color:var(--ob)">Pay all approved</button>' +
-  '</div>' +
-
-  '<div class="card">' +
-    '<div class="ch" style="flex-wrap:wrap;gap:8px">' +
-      '<div style="display:flex;gap:4px;background:var(--bg3);padding:3px;border-radius:var(--r2)">' + tabBtns + '</div>' +
-      '<div style="margin-left:auto;display:flex;gap:8px"><button class="btn btn-sm" onclick="showToast(\'add\',\'Exporting CSV\u2026\')">Export CSV</button></div>' +
-    '</div>' +
-    '<div style="overflow-x:auto"><table style="width:100%;min-width:780px;border-collapse:collapse">' +
-      '<thead><tr>' + ['ID','Affiliate','Customer','Date','Type','Sale','Commission','Status',''].map(function(h,i){ return '<th style="'+thS+(i>=5&&i<=6?';text-align:right':'')+'">'+h+'</th>'; }).join('') + '</tr></thead>' +
-      '<tbody>' + rows + '</tbody>' +
-    '</table></div>' +
-    '<div style="padding:.65rem 1.25rem;border-top:1px solid var(--bd);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">' +
-      '<span style="font-size:11px;color:var(--tx3)">' + paged.length + ' of ' + filtered.length + ' commissions</span>' +
-      '<div style="display:flex;gap:6px">' +
-        '<button onclick="setComPage('+(COM_PAGE-1)+')" '+(COM_PAGE===1?'disabled':'')+' style="'+bs(COM_PAGE===1)+'">&#8249;</button>' +
-        '<button onclick="setComPage('+(COM_PAGE+1)+')" '+(COM_PAGE>=totalP?'disabled':'')+' style="'+bs(COM_PAGE>=totalP)+'">&#8250;</button>' +
-        '<span style="font-size:11px;color:var(--tx3);line-height:2">Page '+COM_PAGE+' of '+totalP+'</span>' +
-      '</div>' +
-    '</div>' +
+  return '<div style="padding:.875rem 1.125rem;background:var(--ol);border:1px solid var(--ob);border-radius:var(--r2);margin-bottom:1.25rem;display:flex;align-items:center;justify-content:space-between;gap:12px">'+
+    '<div><div style="font-size:13px;font-weight:600;color:var(--or)">$'+pendingTotal.toFixed(2)+' in unpaid commissions</div><div style="font-size:11.5px;color:var(--or);margin-top:2px">'+counts.pending+' pending · '+counts.approved+' approved &amp; ready to pay</div></div>'+
+    '<button class="btn btn-sm" onclick="showToast(\'add\',\'Bulk payout initiated\')" style="flex-shrink:0;font-weight:600;color:var(--or);border-color:var(--ob)">Pay all approved</button>'+
+  '</div>'+
+  '<div class="card">'+
+    '<div class="ch" style="flex-wrap:wrap;gap:8px">'+
+      '<div style="display:flex;gap:4px;background:var(--bg3);padding:3px;border-radius:var(--r2)">'+tabs+'</div>'+
+      '<div style="margin-left:auto"><button class="btn btn-sm" onclick="showToast(\'add\',\'Exporting\u2026\')">Export CSV</button></div>'+
+    '</div>'+
+    '<div style="overflow-x:auto"><table style="width:100%;min-width:780px;border-collapse:collapse">'+
+      '<thead><tr>'+['ID','Affiliate','Customer','Date','Type','Sale','Commission','Status',''].map(function(h,i){return '<th style="'+thS+(i>=5&&i<=6?';text-align:right':'')+'">'+h+'</th>';}).join('')+'</tr></thead>'+
+      '<tbody>'+rows+'</tbody>'+
+    '</table></div>'+
+    '<div style="padding:.65rem 1.25rem;border-top:1px solid var(--bd);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">'+
+      '<span style="font-size:11px;color:var(--tx3)">'+paged.length+' of '+filtered.length+' commissions</span>'+
+      '<div style="display:flex;gap:6px">'+
+        '<button onclick="setComPage('+(COM_PAGE-1)+')" '+(COM_PAGE===1?'disabled':'')+' style="'+bs(COM_PAGE===1)+'">&#8249;</button>'+
+        '<button onclick="setComPage('+(COM_PAGE+1)+')" '+(COM_PAGE>=totalP?'disabled':'')+' style="'+bs(COM_PAGE>=totalP)+'">&#8250;</button>'+
+        '<span style="font-size:11px;color:var(--tx3);line-height:2">Page '+COM_PAGE+' of '+totalP+'</span>'+
+      '</div>'+
+    '</div>'+
   '</div>';
 }
 
 function buildAffSetupContent() {
   var p = AFF_PROGRAM;
+  function row(label,content){ return '<div style="display:grid;grid-template-columns:200px 1fr;gap:1.5rem;align-items:start;padding:1.25rem 1.5rem;border-bottom:1px solid var(--bg3)"><div style="font-size:13px;font-weight:600">'+label+'</div><div>'+content+'</div></div>'; }
+  function tgl(checked,key){ return '<div class="tgl '+(checked?'on':'')+'" onclick="affSetupChange(\''+key+'\',!AFF_PROGRAM.'+key+')"><div class="tgl-track"></div><div class="tgl-thumb"></div></div>'; }
+  function sel(val,options,key){ return '<select onchange="affSetupChange(\''+key+'\',this.value);buildAffSetupPage()" style="font-family:var(--f);font-size:13px;padding:7px 12px;border:1px solid var(--bd);border-radius:var(--r);background:var(--bg);color:var(--tx);outline:none;-webkit-appearance:none;min-width:180px">'+options.map(function(o){return '<option value="'+o[0]+'"'+(val===o[0]?' selected':'')+'>'+o[1]+'</option>';}).join('')+'</select>'; }
+  function num(val,key,suffix){ return '<div style="display:flex;align-items:center;gap:8px"><input type="number" value="'+val+'" onchange="affSetupChange(\''+key+'\',parseInt(this.value))" style="font-family:var(--f);font-size:13px;padding:7px 12px;border:1px solid var(--bd);border-radius:var(--r);background:var(--bg);color:var(--tx);outline:none;width:100px" onfocus="this.style.borderColor=\'var(--tx)\'" onblur="this.style.borderColor=\'var(--bd)\'"><span style="font-size:12px;color:var(--tx3)">'+suffix+'</span></div>'; }
+  function typeTile(id,label){ var on=p.commissionType===id; return '<div onclick="affSetupChange(\'commissionType\',\''+id+'\');buildAffSetupPage()" style="display:flex;align-items:center;gap:7px;padding:7px 14px;border:1.5px solid '+(on?'var(--tx)':'var(--bd)')+';border-radius:8px;cursor:pointer;background:'+(on?'var(--bg)':'var(--bg2)')+';font-size:12px;font-weight:'+(on?'600':'400')+'">'+label+'</div>'; }
 
-  function row(label, content) {
-    return '<div style="display:grid;grid-template-columns:200px 1fr;gap:1.5rem;align-items:start;padding:1.25rem 1.5rem;border-bottom:1px solid var(--bg3)">' +
-      '<div><div style="font-size:13px;font-weight:600">' + label + '</div></div>' +
-      '<div>' + content + '</div>' +
-    '</div>';
-  }
-  function tgl(checked, onchange) {
-    return '<div class="tgl '+(checked?'on':'')+'" onclick="'+onchange+'"><div class="tgl-track"></div><div class="tgl-thumb"></div></div>';
-  }
-  function sel(val, options, onchange) {
-    return '<select onchange="'+onchange+'" style="font-family:var(--f);font-size:13px;padding:7px 12px;border:1px solid var(--bd);border-radius:var(--r);background:var(--bg);color:var(--tx);outline:none;-webkit-appearance:none;width:auto;min-width:180px">' +
-      options.map(function(o){ return '<option value="'+o[0]+'"'+(val===o[0]?' selected':'')+'>'+o[1]+'</option>'; }).join('') +
-    '</select>';
-  }
-  function numInp(val, placeholder, onchange) {
-    return '<input type="number" value="'+val+'" placeholder="'+placeholder+'" onchange="'+onchange+'" style="font-family:var(--f);font-size:13px;padding:7px 12px;border:1px solid var(--bd);border-radius:var(--r);background:var(--bg);color:var(--tx);outline:none;width:120px" onfocus="this.style.borderColor=\'var(--tx)\'" onblur="this.style.borderColor=\'var(--bd)\'">';
-  }
-
-  return '<div class="page-centered">' +
-
-    // Share link
-    '<div class="card" style="margin-bottom:1.25rem">' +
-      '<div class="ch"><span class="ct">Your affiliate signup link</span></div>' +
-      '<div class="cb" style="display:flex;align-items:center;gap:12px">' +
-        '<div style="flex:1;display:flex;align-items:center;gap:8px;padding:9px 14px;background:var(--bg2);border:1px solid var(--bd);border-radius:8px">' +
-          '<svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="opacity:.4;flex-shrink:0"><path d="M6 8a2.5 2.5 0 0 0 3.54 0l1.5-1.5a2.5 2.5 0 0 0-3.54-3.54l-.86.85" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><path d="M8 6a2.5 2.5 0 0 0-3.54 0L3 7.5A2.5 2.5 0 0 0 6.54 11l.85-.86" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>' +
-          '<span style="font-family:var(--m);font-size:12px;color:var(--tx2)">suby.fi/affiliates/join</span>' +
-        '</div>' +
-        '<button class="btn btn-sm" onclick="showToast(\'add\',\'Link copied\')">Copy link</button>' +
-        '<button class="btn btn-sm" onclick="showToast(\'add\',\'Opening\u2026\')">Preview</button>' +
-      '</div>' +
-    '</div>' +
-
-    '<div class="card" style="margin-bottom:1.25rem">' +
-      '<div class="ch"><span class="ct">Commission structure</span></div>' +
-      row('Commission type',
-        '<div style="display:flex;gap:8px">' +
-          ['percent','flat'].map(function(t){
-            var on = p.commissionType===t;
-            var label = t==='percent' ? 'Percentage' : 'Flat rate';
-            return '<div onclick="AFF_PROGRAM.commissionType=\''+t+'\';buildAffSetupPage()" style="display:flex;align-items:center;gap:7px;padding:7px 14px;border:1.5px solid '+(on?'var(--tx)':'var(--bd)')+';border-radius:8px;cursor:pointer;background:'+(on?'var(--bg)':'var(--bg2)')+';font-size:12px;font-weight:'+(on?'600':'400')+'">'+label+'</div>';
-          }).join('') +
-        '</div>'
-      ) +
-      row('Commission rate',
-        '<div style="display:flex;align-items:center;gap:8px">' +
-          numInp(p.commissionRate,'e.g. 30','AFF_PROGRAM.commissionRate=parseInt(this.value)') +
-          '<span style="font-size:13px;color:var(--tx3)">' + (p.commissionType==='percent' ? '% of sale amount' : 'USD per conversion') + '</span>' +
-        '</div>'
-      ) +
-      row('Commission duration',
-        sel(p.commissionDuration, [
-          ['first','First payment only'],
-          ['months','Fixed number of months'],
-          ['lifetime','Lifetime (recurring)'],
-        ], 'AFF_PROGRAM.commissionDuration=this.value') +
-        (p.commissionDuration==='months'
-          ? '<div style="margin-top:8px;display:flex;align-items:center;gap:8px">' + numInp(p.commissionMonths,'12','AFF_PROGRAM.commissionMonths=parseInt(this.value)') + '<span style="font-size:12px;color:var(--tx3)">months</span></div>'
-          : '')
-      ) +
-    '</div>' +
-
-    '<div class="card" style="margin-bottom:1.25rem">' +
-      '<div class="ch"><span class="ct">Tracking & payouts</span></div>' +
-      row('Cookie duration',
-        '<div style="display:flex;align-items:center;gap:8px">' +
-          numInp(p.cookieDays,'60','AFF_PROGRAM.cookieDays=parseInt(this.value)') +
-          '<span style="font-size:12px;color:var(--tx3)">days — window for attribution</span>' +
-        '</div>'
-      ) +
-      row('Minimum payout',
-        '<div style="display:flex;align-items:center;gap:8px"><span style="font-size:13px;color:var(--tx3)">$</span>' +
-          numInp(p.minPayout,'50','AFF_PROGRAM.minPayout=parseInt(this.value)') +
-          '<span style="font-size:12px;color:var(--tx3)">USD — affiliates must reach this before payout</span>' +
-        '</div>'
-      ) +
-      row('Self-referral', tgl(p.selfReferral,'AFF_PROGRAM.selfReferral=!AFF_PROGRAM.selfReferral') + '<div style="margin-top:4px;font-size:11.5px;color:var(--tx3)">Allow affiliates to earn commission on their own purchases</div>') +
-    '</div>' +
-
-    '<div style="display:flex;justify-content:flex-end;gap:8px">' +
-      '<button class="btn" onclick="showToast(\'add\',\'Changes discarded\')">Discard</button>' +
-      '<button class="btn btn-p" onclick="showToast(\'add\',\'Program saved\')">Save changes</button>' +
-    '</div>' +
-
+  return '<div class="page-centered">'+
+    '<div class="card" style="margin-bottom:1.25rem">'+
+      '<div class="ch"><span class="ct">Affiliate signup link</span></div>'+
+      '<div class="cb" style="display:flex;align-items:center;gap:12px">'+
+        '<div style="flex:1;display:flex;align-items:center;gap:8px;padding:9px 14px;background:var(--bg2);border:1px solid var(--bd);border-radius:8px">'+
+          '<svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="opacity:.4;flex-shrink:0"><path d="M6 8a2.5 2.5 0 0 0 3.54 0l1.5-1.5a2.5 2.5 0 0 0-3.54-3.54l-.86.85" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><path d="M8 6a2.5 2.5 0 0 0-3.54 0L3 7.5A2.5 2.5 0 0 0 6.54 11l.85-.86" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>'+
+          '<span style="font-family:var(--m);font-size:12px;color:var(--tx2)">suby.fi/affiliates/join</span>'+
+        '</div>'+
+        '<button class="btn btn-sm" onclick="showToast(\'add\',\'Link copied\')">Copy</button>'+
+      '</div>'+
+    '</div>'+
+    '<div class="card" style="margin-bottom:1.25rem">'+
+      '<div class="ch"><span class="ct">Commission</span></div>'+
+      row('Type','<div style="display:flex;gap:8px">'+typeTile('percent','Percentage')+typeTile('flat','Flat rate')+'</div>')+
+      row('Rate',num(p.commissionRate,'commissionRate',p.commissionType==='percent'?'% of sale':'USD per conversion'))+
+      row('Duration',sel(p.commissionDuration,[['first','First payment only'],['months','Fixed months'],['lifetime','Lifetime (recurring)']],'commissionDuration')+(p.commissionDuration==='months'?'<div style="margin-top:8px">'+num(p.commissionMonths,'commissionMonths','months')+'</div>':''))+
+    '</div>'+
+    '<div class="card" style="margin-bottom:1.25rem">'+
+      '<div class="ch"><span class="ct">Tracking &amp; payouts</span></div>'+
+      row('Cookie duration',num(p.cookieDays,'cookieDays','days — attribution window'))+
+      row('Minimum payout','<div style="display:flex;align-items:center;gap:8px"><span style="font-size:13px;color:var(--tx3)">$</span>'+num(p.minPayout,'minPayout','USD minimum before payout')+'</div>')+
+      row('Self-referral',tgl(p.selfReferral,'selfReferral')+'<div style="margin-top:4px;font-size:11.5px;color:var(--tx3)">Allow affiliates to earn commission on their own purchases</div>')+
+    '</div>'+
+    '<div style="display:flex;justify-content:flex-end;gap:8px">'+
+      '<button class="btn" onclick="showToast(\'add\',\'Discarded\')">Discard</button>'+
+      '<button class="btn btn-p" onclick="showToast(\'add\',\'Program saved\')">Save changes</button>'+
+    '</div>'+
   '</div>';
 }
 
 function buildAffSetupPage() {
   var pg = document.getElementById('p-affiliate-setup');
   if (!pg) return;
-  pg.innerHTML = '<div class="ph"><h2>Program setup</h2><p>Configure your affiliate program — commission, tracking and payout rules.</p></div>' + buildAffSetupContent();
+  pg.innerHTML = '<div class="ph"><h2>Program setup</h2><p>Configure commission, tracking and payout rules.</p></div>' + buildAffSetupContent();
   pg.dataset.built = '1';
 }
 
